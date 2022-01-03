@@ -1,0 +1,62 @@
+<header class="primary-bg">
+  <nav class="navbar navbar-light fixed-top primary-bg">
+    <div class="container-fluid ">
+      <button class="navbar-toggler fw-bolder" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="col-5">
+        <%= image_tag("sneaker-logo.png", class: "img-fluid", alt: 'sneaker logo' ) %>
+      </div>
+      <div>
+        <span><i class="fs-3 fw-bolder bi bi-cart-plus"></i></span>
+        <span><i class="fs-3 fw-bolder bi bi-search"></i></span>
+      </div>
+      <div class="offcanvas offcanvas-start w-75" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item border-bottom">
+              <%= link_to "shop all", '#', class: "nav-link" %>
+            </li>
+            <li class="nav-item dropdown border-bottom">
+              <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Shop by Brand
+              </a>
+              <ul class="dropdown-menu border-0" aria-labelledby="offcanvasNavbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown border-bottom">
+              <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Shop by Gender
+              </a>
+              <ul class="dropdown-menu border-0" aria-labelledby="offcanvasNavbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            <li class="nav-item border-bottom">
+              <%= link_to "Contact", '#', class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Log in", '#', class: "nav-link" %>
+            </li>
+          </ul>
+          <form class="position-relative mt-2">
+            <input class="form-control me-2 position-absolute" type="search" placeholder="Search" >
+            <button class="btn position-absolute end-0" type="submit">
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
