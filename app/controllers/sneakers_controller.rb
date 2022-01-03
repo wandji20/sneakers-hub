@@ -3,9 +3,11 @@ class SneakersController < ApplicationController
   def index
     @brands = Brand.all
     @genders = Gender.all
+    @sneakers = Sneaker.all.includes(:brand, :gender)
   end
 
   def show
+    @sneaker
   end
 
   private

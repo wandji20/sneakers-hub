@@ -21,9 +21,18 @@
       <p class="d-flex flex-column">
         <span class="inline-block">$<%= @sneaker.price %></span>
       </p>
+       <p>
+        <span>Brand:</span>
+        <span class="inline-block"><%= @sneaker.brand.name %></span>
+      </p>
+       <p>
+        <span>Gender:</span>
+        <span class="inline-block"><%= @sneaker.gender.name %></span>
+      </p>
       <p>
         <span>Release Date:</span>
-        <span class="inline-block"><%= @sneaker.release_date.strftime('%a %d %b %Y') %></span></p>
+        <span class="inline-block"><%= @sneaker.release_date.strftime('%a %d %b %Y') %></span>
+      </p>
     </div>
     <div class="d-flex flex-column bg-white pt-2">
       <button class="btn bg-dark text-light my-1">
