@@ -14,3 +14,15 @@
 .gray-bg {
   background: #f0f0f0;
 }
+
+.connect-title:after {
+  background: #222;
+  left: 50%;
+  margin-left: -18px;
+  content: "";
+  width: 36px;
+  height: 4px;
+  background: #212121;
+  position: absolute;
+  bottom: -12px;
+}
