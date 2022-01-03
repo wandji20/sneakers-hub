@@ -5,7 +5,9 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="col-5">
-        <%= image_tag("sneaker-logo.png", class: "img-fluid", alt: 'sneaker logo' ) %>
+        <%= link_to root_path do %>
+          <%= image_tag("sneaker-logo.png", class: "img-fluid", alt: 'sneaker logo' ) %>
+        <% end %>
       </div>
       <div>
         <span><i class="fs-5 fw-bolder bi bi-cart-plus"></i></span>
@@ -18,16 +20,14 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item border-bottom">
-              <%= link_to "shop all", '#', class: "nav-link" %>
+              <%= link_to "shop all", sneakers_path, class: "nav-link" %>
             </li>
             <li class="nav-item dropdown border-bottom">
               <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Shop by Brand
               </a>
               <ul class="dropdown-menu border-0" aria-labelledby="offcanvasNavbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <%= render partial: 'shared/dropdown_items', collection: @brands, as: :item %>
               </ul>
             </li>
             <li class="nav-item dropdown border-bottom">
@@ -35,11 +35,7 @@
                 Shop by Gender
               </a>
               <ul class="dropdown-menu border-0" aria-labelledby="offcanvasNavbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <%= render partial: 'shared/dropdown_items', collection: @genders, as: :item %>
               </ul>
             </li>
             <li class="nav-item border-bottom">
