@@ -24,8 +24,9 @@ def populate_database
     brand_name = sneaker['brand']
     gender_name = sneaker['gender']
     title = sneaker['title']
+    name = sneaker['name']
     release_date = sneaker['releaseDate']
-    price = sneaker['retailPrice']
+    price = sneaker['retailPrice'] == 0 ? 110 : sneaker['retailPrice']
     colors = sneaker['colorWay']
     image_url = sneaker['media']['imageUrl'] || sneaker['media']['smallImageUrl'] || sneaker['media']['thumbUrl']
     if image_url
@@ -33,7 +34,7 @@ def populate_database
         brand = create_brand(brand_name)
         gender = create_gender(gender_name)
         create_sneaker(
-          shoe_id, title, colors, release_date, price, image_url, brand, gender
+          shoe_id, title, name, colors, release_date, price, image_url, brand, gender
           )
       end
     end
@@ -53,13 +54,14 @@ def create_gender(name)
 
 end
 
-def create_sneaker(shoe_id, title, colors, release_date, price, image_url, brand, gender)
+def create_sneaker(shoe_id, title, name, colors, release_date, price, image_url, brand, gender)
   sneaker = Sneaker.find_by_shoe_id(shoe_id)
   return unless sneaker.nil?
   Sneaker.create!(
     shoe_id: shoe_id,
     title: title,
     colors: colors,
+    name: name,
     release_date: release_date,
     price: price,
     image_url: image_url,

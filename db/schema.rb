@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2022_01_03_073427) do
     t.integer "brand_id", null: false
     t.integer "gender_id", null: false
     t.string "colors"
+    t.string "name"
     t.date "release_date"
     t.integer "price"
     t.string "shoe_id"
@@ -37,9 +38,9 @@ ActiveRecord::Schema.define(version: 2022_01_03_073427) do
     t.string "image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\"name\"", name: "index_sneakers_on_name"
     t.index ["brand_id"], name: "index_sneakers_on_brand_id"
     t.index ["gender_id"], name: "index_sneakers_on_gender_id"
+    t.index ["name"], name: "index_sneakers_on_name"
     t.index ["shoe_id"], name: "index_sneakers_on_shoe_id"
   end
 
