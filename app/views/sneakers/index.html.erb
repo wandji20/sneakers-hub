@@ -1,3 +1,9 @@
 <section class="d-flex flex-column secondary-bg container-fluid py-1">
   <%= render @sneakers %>
 </section>
+<div class="container-fluid pt-2">
+  <div class="col-12">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
+</div>
+

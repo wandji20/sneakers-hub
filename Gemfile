@@ -27,6 +27,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'http', '~> 5.0', '>= 5.0.4'
 # Dot env rails
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
+# Pagy
+gem 'pagy', '~> 5.6', '>= 5.6.9'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

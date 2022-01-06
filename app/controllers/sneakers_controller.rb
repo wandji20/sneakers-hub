@@ -3,7 +3,8 @@ class SneakersController < ApplicationController
   def index
     @brands = Brand.all
     @genders = Gender.all
-    @sneakers = Sneaker.all.includes(:brand, :gender)
+    @pagy, @sneakers = pagy(Sneaker.all)
+    @sneakers.includes(:brand, :gender)
   end
 
   def show
