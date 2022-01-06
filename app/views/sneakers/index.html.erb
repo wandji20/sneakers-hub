@@ -1,11 +1,11 @@
 <div class="container-fluid pt-3 pb-4">
-  <h3 class="connect-title text-center position-relative">Sneakers</h3>
+  <h3 class="connect-title text-center position-relative fw-normal">Sneakers</h3>
   <div class="dropdown mt-4 border rounded ">
     <button class="btn w-100 dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
       <div>
         <span>Sort By</span>
         <span class="ms-2">-</span>
-        <span class="ms-2">All</span>
+        <span class="ms-2"><%= @sort_option %></span>
       </div>
     </button>
     <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
