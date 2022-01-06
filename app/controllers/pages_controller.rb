@@ -5,6 +5,5 @@ class PagesController < ApplicationController
     @sneakers = Sneaker.take(10)
   end
 
-  def about
-  end
+  def about; end
 end
