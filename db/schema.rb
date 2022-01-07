@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_073427) do
+ActiveRecord::Schema.define(version: 2022_01_06_154850) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
@@ -24,6 +24,21 @@ ActiveRecord::Schema.define(version: 2022_01_03_073427) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_genders_on_name"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "sneaker_id", null: false
+    t.integer "quantity", default: 1
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["sneaker_id"], name: "index_order_items_on_sneaker_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sneakers", force: :cascade do |t|
@@ -44,6 +59,8 @@ ActiveRecord::Schema.define(version: 2022_01_03_073427) do
     t.index ["shoe_id"], name: "index_sneakers_on_shoe_id"
   end
 
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "sneakers"
   add_foreign_key "sneakers", "brands"
   add_foreign_key "sneakers", "genders"
 end
