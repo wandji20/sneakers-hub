@@ -1,6 +1,7 @@
 class SneakersController < ApplicationController
   before_action :set_sneaker, only: :show
   before_action :set_sort_option
+  before_action :save_url, only: :index
   def index
     @brands = Brand.all
     @genders = Gender.all
