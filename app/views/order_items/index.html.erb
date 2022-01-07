@@ -1,0 +1,21 @@
+<section class="container-fluid">
+   
+  <h3>Shopping Cart</h3>
+  
+  <% if @current_order.order_items.size > 0 %>
+    <div>
+      <%= render @current_order.order_items %>
+    </div>
+    <div>
+      <button type="button" class="btn btn-dark w-100" data-bs-dismiss="modal">
+        <span>Check Out</span>
+        <span><i class="bi bi-chevron-right"></i></span>
+      </button>
+      <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">
+        Continue Shopping
+      </button>
+    </div>
+  <% else %>
+    <p>No items in List Yet</p>
+  <% end %>
+</section>
