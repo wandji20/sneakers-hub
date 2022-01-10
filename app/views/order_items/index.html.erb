@@ -6,14 +6,24 @@
     <div class="container-fluid">
       <%= render @order_items %>
     </div>
-    <div>
-      <button type="button" class="btn btn-dark w-100" data-bs-dismiss="modal">
-        <span>Check Out</span>
-        <span><i class="bi bi-chevron-right"></i></span>
-      </button>
-      <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">
-        Continue Shopping
-      </button>
+    <div class="container-fluid p-2 text-end">
+      <span>Total:</span>
+      <span class="ms-2"><%= @total %></span>
+    </div>
+    <div class="mt-2">
+      <%= link_to checkout_path do %>
+        <button type="button" class="btn btn-dark w-100 mb-2" data-bs-dismiss="modal">
+          <span>Check Out</span>
+          <span><i class="bi bi-chevron-right"></i></span>
+        </button>
+      <% end %>
+
+      <%= link_to sneakers_path do %>
+        <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">
+          Continue Shopping
+        </button>
+      <% end %>
+      
     </div>
   <% else %>
     <p>No items in List Yet</p>

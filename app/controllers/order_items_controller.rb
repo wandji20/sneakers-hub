@@ -1,28 +1,26 @@
 class OrderItemsController < ApplicationController
-  before_action :set_order_item, except: [:new, :create, :index]
-
+  before_action :set_order_item, except: [:new, :index, :create]
+  before_action :set_sneaker, only: [:create]
+  before_action :verify_order_item, only: :create
   def index
-    @order_items = @current_order.order_items
+    @total = set_order_total
   end
   def create
     @current_order.order_items.build(order_item_params)
     if @current_order.save
       session[:order_id] = @current_order.id
-      sneaker = Sneaker.find(order_item_params[:sneaker_id])
-      flash[:notice] = "#{sneaker.name} has been added to cart"
-      redirect_to sneaker
-    elsif order_item_is_not_in_order?
-      flash[:alert] = "#{sneaker.name.capitalize} is already in cart"
-      redirect_back(fallback_location: sneakers_path)
+      
+      flash[:notice] = "#{@sneaker.name} has been added to cart"
+      redirect_to @sneaker || root_path
     else
       flash[:alert] = 'Something went wrong'
-      redirect_back(fallback_location: sneakers_path)
+      redirect_back(fallback_location: @sneakers_path)
     end
   end
 
   def update
     if @order_item.update(quantity: order_item_params[:quantity])
-      flash[:notice] = "#{order_item.sneaker.name} has been updated in cart"
+      flash[:notice] = "#{@order_item.sneaker.name} has been updated in cart"
       redirect_to order_items_path
     else
       flash[:alert] = 'Something went wrong'
@@ -41,14 +39,26 @@ class OrderItemsController < ApplicationController
   end
 
   def set_order_item
-    @order_item = @current_order.order_items.find(params[:id])
+    @order_item = @order_items.find_by_id(params[:id])
   end
 
-  def order_item_is_not_in_order?
-    sneaker = @current_order
-                .order_items
-                .where(':sneaker_id = ?', order_items_params[:sneaker_id])
-                .take
+  def set_sneaker
+    @sneaker = Sneaker.find_by_id(order_item_params[:sneaker_id])
+  end
+
+  def order_item_is_in_order?
+    sneaker = @order_items.where('sneaker_id = ?', order_item_params[:sneaker_id].to_i).take
     !!sneaker
+  end
+
+  def verify_order_item
+    if order_item_is_in_order?
+      flash[:alert] = "#{@sneaker.name.capitalize} is already in cart"
+      redirect_back(fallback_location: @sneakers_path)
+    end
+  end
+
+  def set_order_total
+    @order_items.sum(:sub_total)
   end
 end

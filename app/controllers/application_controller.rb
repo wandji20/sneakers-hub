@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_order_items
-    @order_items = @current_order.order_items
+    @order_items = @current_order.order_items.includes(:sneaker)
   end
 
   def save_url

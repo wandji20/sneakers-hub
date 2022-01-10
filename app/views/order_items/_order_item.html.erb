@@ -12,13 +12,15 @@
     <span>Unit Price: $<%= order_item.sneaker.price %></span>
   </div>
   <div class="col-4 d-flex mt-1 p-0">
-    <span class="border col-4 p-0 text-center">
+
+    <%= link_to order_item_path(order_item, quantity: order_item.quantity - 1), method: :put, class: "border text-black col-4 p-0 text-center" do %>
       <i class="bi bi-dash"></i>
-    </span>
-    <span class="border-top border-bottom bg-light col-4 p-0 text-center">1</span>
-    <span class="border col-4 p-0 text-center">
+    <% end %>
+    
+    <span class="border-top border-bottom bg-light col-4 p-0 text-center"><%= order_item.quantity %></span>
+    <%= link_to order_item_path(order_item, quantity: order_item.quantity + 1), method: :put, class: "border text-black col-4 p-0 text-center" do %>
       <i class="bi bi-plus"></i>
-    </span>
+    <% end %>
   </div>
   <div class="col-8 text-end mt-1">
     <span>Subtotal:</span>

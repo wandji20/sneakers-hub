@@ -4,5 +4,9 @@ class PagesController < ApplicationController
     @sneakers = Sneaker.release_date.take(10)
   end
 
+  def checkout
+    
+  end
+
   def about; end
 end

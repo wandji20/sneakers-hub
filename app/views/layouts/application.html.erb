@@ -6,12 +6,15 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'  %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbo-track': 'reload'  %>
+    <%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
+
   </head>
 
   <body class="container p-0 m-0">
+    <%= render 'shared/alert' %>
+    <%= render 'shared/notice' %>
     <%= render 'navbar/nav_menu' %>
     <%= yield %>
   </body>
