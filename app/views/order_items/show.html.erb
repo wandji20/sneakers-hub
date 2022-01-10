@@ -1,3 +1,2 @@
-<%= turbo_frame_tag dom_id(@order_item) do %>
-  <%= render partial: 'order_items/order_item', locals: {order_item: @order_item} %>
-<% end %>
+
+<%= render partial: 'order_items/order_item', locals: {order_item: @order_item} %>

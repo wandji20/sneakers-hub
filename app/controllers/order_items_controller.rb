@@ -2,9 +2,11 @@ class OrderItemsController < ApplicationController
   before_action :set_order_item, except: [:new, :index, :create]
   before_action :set_sneaker, only: [:create]
   before_action :verify_order_item, only: :create
+
   def index
     @total = set_order_total
   end
+
   def create
     @current_order.order_items.build(order_item_params)
     if @current_order.save
@@ -21,11 +23,15 @@ class OrderItemsController < ApplicationController
   def update
     if @order_item.update(quantity: order_item_params[:quantity])
       flash[:notice] = "#{@order_item.sneaker.name} has been updated in cart"
-      redirect_to order_items_path
+      redirect_to @order_item
+      # render :show
     else
       flash[:alert] = 'Something went wrong'
       redirect_to order_items_path
     end
+  end
+
+  def show
   end
 
   def destroy
