@@ -36,15 +36,16 @@
     </div>
     <div class="d-flex flex-column bg-white pt-2">
       <%= link_to order_items_path(sneaker_id: @sneaker.id), method: 'post' do %>
-        <button class="btn bg-dark text-light my-1 w-100" >
+        <button class="btn bg-dark text-light my-1 w-100" data-bs-toggle="modal" data-bs-target="#shopping-cart">
           <span>Add to Cart</span>
           <span><i class="bi bi-plus"></i></span>
         </button>
-        <button class="btn bg-black text-light my-1 w-100" data-bs-toggle="modal" data-bs-target="#shopping-cart">
-          Buy it Now
-        </button>
       <% end %>
+      <button class="btn bg-black text-light my-1 w-100">
+        Buy it Now
+      </button>
     </div>
   </article>
 
 </section>
+<%= render 'shared/cart_modal' %>

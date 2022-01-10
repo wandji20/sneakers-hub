@@ -3,8 +3,13 @@
     <%= image_tag order_item.sneaker.image_url, class: "img-fluid" %>
   </div>
   <div class="col-8 d-flex flex-column">
-    <span class="align-self-end"><i class="bi bi-trash"></i></span>
-    <span class="align-self-end"><%= order_item.sneaker.name %></span>
+    <span class="align-self-end">
+      <%= link_to order_item, method: :delete, class: "text-danger" do %>
+        <i class="bi bi-trash"></i>
+      <% end %>
+    </span>
+    <span class=""><%= order_item.sneaker.name %></span>
+    <span>Unit Price: $<%= order_item.sneaker.price %></span>
   </div>
   <div class="col-4 d-flex mt-1 p-0">
     <span class="border col-4 p-0 text-center">
@@ -16,6 +21,7 @@
     </span>
   </div>
   <div class="col-8 text-end mt-1">
-    $<%= order_item.sneaker.price %>
+    <span>Subtotal:</span>
+    <span>$<%= order_item.sub_total %></span>
   </div>
 </div>
