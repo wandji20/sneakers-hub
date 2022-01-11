@@ -1,0 +1,6 @@
+<%= turbo_stream.update('notice') do %>
+  <%= render partial: 'shared/notice' %>
+<% end %>
+<%= turbo_stream.update('cart-badge') do %>
+  <%= render partial: 'shared/cart_badge', locals: { count: @order_items.count} %>
+<% end %>

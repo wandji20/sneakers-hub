@@ -11,7 +11,9 @@
       </div>
       <div >
         <%= link_to order_items_path, class: "text-dark text-decoration-none" do %> 
-          <%= render partial: 'shared/cart_badge', locals: { count: @order_items_count } %>
+          <%= turbo_frame_tag 'cart-badge' do %>
+            <%= render partial: 'shared/cart_badge', locals: { count: @order_items_count } %>
+          <% end %>
         <% end %>
         <span class=""><i class="fs-3 fw-bolder bi bi-search"></i></span>
       </div>

@@ -13,8 +13,12 @@
   </head>
 
   <body class="container p-0 m-0">
-    <%= render 'shared/alert' %>
-    <%= render 'shared/notice' %>
+    <%= turbo_frame_tag 'alert' do %>
+      <%= render partial: 'shared/alert' %>
+    <% end %>
+    <%= turbo_frame_tag 'notice' do %>
+      <%= render partial: 'shared/notice' %>
+    <% end %>
     <%= render 'navbar/nav_menu' %>
     <%= yield %>
   </body>
