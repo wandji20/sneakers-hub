@@ -1,5 +1,5 @@
 class OrderItemsController < ApplicationController
-  before_action :set_order_item, except: [:new, :index, :create]
+  before_action :set_order_item, except: %i[new index create]
   before_action :set_sneaker, only: [:create]
   before_action :verify_order_item, only: :create
 
@@ -29,12 +29,11 @@ class OrderItemsController < ApplicationController
       end
     else
       flash.now[:alert] = 'Something went wrong'
-      render turbo_stream: turbo_stream.update('alert', partial: 'shared/alert' )
+      render turbo_stream: turbo_stream.update('alert', partial: 'shared/alert')
     end
   end
 
-  def show
-  end
+  def show; end
 
   def destroy
     @order_item.destroy
@@ -44,6 +43,7 @@ class OrderItemsController < ApplicationController
   end
 
   private
+
   def order_item_params
     params.permit(:sneaker_id, :quantity)
   end

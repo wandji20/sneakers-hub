@@ -12,5 +12,4 @@ class OrderItem < ApplicationRecord
   def set_sub_total
     self[:sub_total] = sub_total
   end
-
 end

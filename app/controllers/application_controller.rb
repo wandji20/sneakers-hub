@@ -10,11 +10,11 @@ class ApplicationController < ActionController::Base
   end
 
   def load_order
-    if session[:order_id]
-      @current_order = Order.find(session[:order_id])
-    else
-      @current_order = Order.new
-    end
+    @current_order = if session[:order_id]
+                       Order.find(session[:order_id])
+                     else
+                       Order.new
+                     end
   end
 
   def load_order_items

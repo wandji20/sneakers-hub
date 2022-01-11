@@ -27,9 +27,9 @@ class SneakersController < ApplicationController
 
   def set_sort_option
     sort_options = {
-      'increasing_price': 'Increasing Price',
-      'decreasing_price': 'Decreasing Price',
-      'release_date': 'Release Date'
+      increasing_price: 'Increasing Price',
+      decreasing_price: 'Decreasing Price',
+      release_date: 'Release Date'
     }
 
     @sort_option = sort_options[params['sort-by']&.to_sym] || 'All'
