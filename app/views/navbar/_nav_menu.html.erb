@@ -10,7 +10,7 @@
         <% end %>
       </div>
       <div >
-        <%= link_to order_items_path, class: "text-dark text-decoration-none" do %> 
+        <%= link_to order_items_path, class: "text-dark text-decoration-none" do %>
           <%= turbo_frame_tag 'cart-badge' do %>
             <%= render partial: 'shared/cart_badge', locals: { count: @order_items_count } %>
           <% end %>

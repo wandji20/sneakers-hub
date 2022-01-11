@@ -16,16 +16,17 @@ class OrderItemsController < ApplicationController
         format.turbo_stream
       end
     else
-      flash[:alert] = 'Something went wrong'
+      flash.now[:alert] = 'Something went wrong'
       render turbo_stream: turbo_stream.update('alert', partial: 'shared/alert')
-      # redirect_back(fallback_location: @sneakers_path)
     end
   end
 
   def update
     if @order_item.update(quantity: order_item_params[:quantity])
-      flash[:notice] = "#{@order_item.sneaker.name} has been updated in cart"
-      redirect_to @order_item
+      flash.now[:notice] = "#{@order_item.sneaker.name} has been updated in cart"
+      respond_to do |format|
+        format.turbo_stream
+      end
     else
       flash.now[:alert] = 'Something went wrong'
       render turbo_stream: turbo_stream.update('alert', partial: 'shared/alert' )
@@ -37,7 +38,9 @@ class OrderItemsController < ApplicationController
 
   def destroy
     @order_item.destroy
-    redirect_to order_items_path
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   private
@@ -60,9 +63,7 @@ class OrderItemsController < ApplicationController
 
   def verify_order_item
     if order_item_is_in_order?
-      # alert = "#{@sneaker.name.capitalize} is already in cart"
-      # render turbo_stream: turbo_stream.update('alert', partial: 'shared/alert', locals: { alert: alert } )
-      flash[:alert] = "#{@sneaker.name.capitalize} is already in cart"
+      flash.now[:alert] = "#{@sneaker.name.capitalize} is already in cart"
       render turbo_stream: turbo_stream.update('alert', partial: 'shared/alert')
     end
   end
