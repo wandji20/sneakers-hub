@@ -1,31 +1,33 @@
 <section class="container-fluid">
    
   <h3 class="text-center mt-2 fw-light">Shopping Cart</h3>
-  
-  <% if @order_items&.size > 0 %>
-    <div class="container-fluid">
-      <%= render @order_items %>
-    </div>
-    <div class="container-fluid p-2 text-end">
-      <span>Total:</span>
-      <span class="ms-2"><%= @total %></span>
-    </div>
-    <div class="mt-2">
-      <%= link_to checkout_path do %>
-        <button type="button" class="btn btn-dark w-100 mb-2" data-bs-dismiss="modal">
-          <span>Check Out</span>
-          <span><i class="bi bi-chevron-right"></i></span>
-        </button>
-      <% end %>
+  <%= turbo_stream_from(@order_items) %>
+  <%= turbo_frame_tag 'order' do %>
+    <% if @order_items&.size > 0 %>
+        <div class="container-fluid">
+          <%= render @order_items %>
+        </div>
+      <div class="container-fluid p-2 text-end">
+        <span>Total:</span>
+        <span class="ms-2"><%= @total %></span>
+      </div>
+      <div class="mt-2">
+        <%= link_to checkout_path do %>
+          <button type="button" class="btn btn-dark w-100 mb-2" data-bs-dismiss="modal">
+            <span>Check Out</span>
+            <span><i class="bi bi-chevron-right"></i></span>
+          </button>
+        <% end %>
 
-      <%= link_to sneakers_path do %>
-        <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">
-          Continue Shopping
-        </button>
-      <% end %>
-      
-    </div>
-  <% else %>
-    <p>No items in List Yet</p>
+        <%= link_to sneakers_path do %>
+          <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">
+            Continue Shopping
+          </button>
+        <% end %>
+        
+      </div>
+    <% else %>
+      <p>No items in List Yet</p>
+    <% end %>
   <% end %>
 </section>

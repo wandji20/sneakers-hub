@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
 
   def load_order_items
     @order_items = @current_order.order_items.includes(:sneaker)
+    @order_items_count = @order_items.count
   end
 
   def save_url

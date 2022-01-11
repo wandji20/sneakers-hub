@@ -10,11 +10,9 @@
         <% end %>
       </div>
       <div >
-        <span class="position-relative <%= @order_items.length > 0 ? 'cart-batch' : '' %> ">
-          <%= link_to order_items_path, class: "text-dark text-decoration-none" do %> 
-            <i class="fs-3 fw-bolder bi bi-cart"></i>
-          <% end %>
-        </span>
+        <%= link_to order_items_path, class: "text-dark text-decoration-none" do %> 
+          <%= render partial: 'shared/cart_badge', locals: { count: @order_items_count } %>
+        <% end %>
         <span class=""><i class="fs-3 fw-bolder bi bi-search"></i></span>
       </div>
       <div class="offcanvas offcanvas-start w-75" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">

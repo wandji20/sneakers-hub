@@ -45,14 +45,19 @@ p {
   box-shadow: none;
 }
 
-.cart-batch:after {
-  content: "";
-  position: absolute;
-  width: 9px;
-  height: 9px;
-  display: block;
-  background: #141414;
-  top: -5px;
-  right: 2px;
-  border-radius: 50%;
+// .cart-badge:after {
+//   content: "";
+//   position: absolute;
+//   width: 9px;
+//   height: 9px;
+//   display: block;
+//   background: #141414;
+//   top: -5px;
+//   right: 2px;
+//   border-radius: 50%;
+// }
+
+.cart-badge {
+  left: 10px;
+  bottom: 18px;
 }

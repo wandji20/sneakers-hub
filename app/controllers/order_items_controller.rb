@@ -8,10 +8,15 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-    @current_order.order_items.build(order_item_params)
+    @rder_item = @current_order.order_items.build(order_item_params)
     if @current_order.save
       session[:order_id] = @current_order.id
-      
+      respond_to do |format|
+        format.turbo_stream do
+          turbo_stream.append('order_items', @order_item)
+          # turbo_stream.replace()
+        end 
+      end
       flash[:notice] = "#{@sneaker.name} has been added to cart"
       redirect_to @sneaker || root_path
     else
