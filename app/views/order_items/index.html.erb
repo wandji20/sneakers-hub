@@ -8,11 +8,11 @@
           <%= render @order_items %>
         </div>
       <% end %>
-      <div class="mt-2 fixed-bottom bg-light container-fluid">
+      <div class="mt-2 fixed-bottom bg-light container-fluid order-summary">
         <%= turbo_frame_tag 'total_price' do %>
           <%= render partial: 'order_items/total_order_price', locals: { total: @total} %>
         <% end %>
-        <div class="col d-flex justify-content-between mb-3">
+        <div class="col d-flex justify-content-between mb-3 order-buttons ">
           <%= link_to checkout_path, class: 'col-6' do %>
             <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
               <span>Check Out</span>

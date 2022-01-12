@@ -62,10 +62,12 @@ class OrderItemsController < ApplicationController
   end
 
   def verify_order_item
+    # rubocop:disable  Style/GuardClause
     if order_item_is_in_order?
       flash.now[:alert] = "#{@sneaker.name.capitalize} is already in cart"
       render turbo_stream: turbo_stream.update('alert', partial: 'shared/alert')
     end
+    # rubocop:enable  Style/GuardClause
   end
 
   def set_order_total
