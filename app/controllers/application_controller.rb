@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :load_order, :set_brands_and_genders, :load_order_items
+
   include Pagy::Backend
 
   private

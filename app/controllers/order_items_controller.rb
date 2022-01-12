@@ -2,6 +2,7 @@ class OrderItemsController < ApplicationController
   before_action :set_order_item, except: %i[new index create]
   before_action :set_sneaker, only: [:create]
   before_action :verify_order_item, only: :create
+  before_action :save_url, only: :index
 
   def index
     @total = set_order_total
