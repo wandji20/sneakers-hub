@@ -1,0 +1,15 @@
+<%= link_to sneaker, class: "p-1 my-1 bg-white text-decoration-none text-black" do %>
+  <article class="col">
+    <div>
+      <%= image_tag sneaker.image_url, class: 'img-fluid', alt: sneaker.image_url %>
+    </div>
+    <p class="d-flex justify-content-between py-1">
+      <span class="inline-block"><%= sneaker.name %></span>
+      <span class="inline-block">$<%= sneaker.price %></span>
+    </p>
+    <p class="fw-light">
+      <span>Release Date:</span>
+      <span><%= sneaker.release_date&.strftime('%a %d %b %Y') %></span>
+    </p>
+  </article>
+<% end %>

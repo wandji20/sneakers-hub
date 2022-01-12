@@ -1,0 +1,52 @@
+<section class="container-fluid text-capitalize">
+  <nav class="my-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb mb-0 text-center d-flex justify-content-center">
+      <li class="breadcrumb-item">
+        <%= link_to 'Home', root_path, class: "text-decoration-none text-black-50" %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to 'Sneakers', sneakers_path, class: "text-decoration-none text-black-50" %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        <%= @sneaker.id %>
+      </li>
+    </ol>
+  </nav>
+  <article class="d-flex flex-column secondary-bg">
+    <div>
+      <%= image_tag @sneaker.image_url, alt: @sneaker.title, class: "img-fluid" %>
+    </div>
+    <div class="px-2 py-3">
+      <h6 class=""><%= @sneaker.title %></h6>
+      <p class="d-flex flex-column">
+        <span class="inline-block">$<%= @sneaker.price %></span>
+      </p>
+       <p>
+        <span>Brand:</span>
+        <span class="inline-block"><%= @sneaker.brand.name %></span>
+      </p>
+       <p>
+        <span>Gender:</span>
+        <span class="inline-block"><%= @sneaker.gender.name %></span>
+      </p>
+      <p>
+        <span>Release Date:</span>
+        <span class="inline-block"><%= @sneaker.release_date.strftime('%a %d %b %Y') %></span>
+      </p>
+    </div>
+    <div class="d-flex flex-column bg-white pt-2">
+      <%= link_to order_items_path(sneaker_id: @sneaker.id), method: 'post' do %>
+        <button class="btn bg-dark text-light my-1 w-100">
+          <span>Add to Cart</span>
+          <span><i class="bi bi-plus"></i></span>
+        </button>
+      <% end %>
+      <%= link_to checkout_path do %>
+        <button class="btn bg-black text-light my-1 w-100">
+          Buy it Now
+        </button>
+      <% end %>
+    </div>
+  </article>
+
+</section>

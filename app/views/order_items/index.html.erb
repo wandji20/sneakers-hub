@@ -1,0 +1,34 @@
+<section class="container-fluid">
+   
+  <h3 class="text-center mt-2 fw-light">Shopping Cart</h3>
+    <% if @order_items&.size > 0 %>
+  
+      <%= turbo_frame_tag 'order_items' do %>
+        <div class="container-fluid border order-items">
+          <%= render @order_items %>
+        </div>
+      <% end %>
+      <div class="mt-2 fixed-bottom bg-light container-fluid order-summary">
+        <%= turbo_frame_tag 'total_price' do %>
+          <%= render partial: 'order_items/total_order_price', locals: { total: @total} %>
+        <% end %>
+        <div class="col d-flex justify-content-between mb-3 order-buttons ">
+          <%= link_to checkout_path, class: 'col-6' do %>
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+              <span>Check Out</span>
+              <span><i class="bi bi-chevron-right"></i></span>
+            </button>
+          <% end %>
+
+          <%= link_to sneakers_path, class: 'col-6' do %>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Continue Shopping
+            </button>
+          <% end %>
+        </div>
+        
+      </div>
+    <% else %>
+      <p>No items in List Yet</p>
+    <% end %>
+</section>

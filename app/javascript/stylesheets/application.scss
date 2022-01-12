@@ -1,0 +1,71 @@
+@import "~bootstrap/scss/bootstrap";
+.remove-padding {
+  padding: 0;
+}
+
+.primary-bg {
+  background-color: #f4e1d9;
+}
+
+.secondary-bg {
+  background-color: #f9f6f0;
+}
+
+.gray-bg {
+  background: #f0f0f0;
+}
+
+.connect-title:after {
+  background: #222;
+  left: 50%;
+  margin-left: -18px;
+  content: "";
+  width: 36px;
+  height: 4px;
+  background: #212121;
+  position: absolute;
+  bottom: -12px;
+}
+
+.announcement {
+  margin-top: 64px;
+}
+
+.pagination {
+  justify-content: center;
+}
+
+p {
+  margin-block: 0;
+}
+
+#sort-by {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+// .cart-badge:after {
+//   content: "";
+//   position: absolute;
+//   width: 9px;
+//   height: 9px;
+//   display: block;
+//   background: #141414;
+//   top: -5px;
+//   right: 2px;
+//   border-radius: 50%;
+// }
+
+.cart-badge {
+  left: 10px;
+  bottom: 18px;
+}
+
+.order-summary {
+  height: 12vh;
+}
+
+.order-items {
+  margin-bottom: 12vh;
+}
