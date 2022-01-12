@@ -16,7 +16,9 @@
           <% end %>
         <% end %>
         <span class=""><i class="fs-3 fw-bolder bi bi-search"></i></span>
-      </div>
+        <%= link_to "#sign-up-toggle", 'data-bs-toggle': "modal", role: 'button', class: 'text-dark text-decoration-none' do %>
+          <i class="bi bi-person-fill fs-3 fw-bolder"></i>
+        <% end %>
       <div class="offcanvas offcanvas-start w-75" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -46,7 +48,7 @@
               <%= link_to "Contact", '#', class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <%= link_to "Log in", '#', class: "nav-link" %>
+              <%= link_to "Log in", '#sign-up-toggle', class: "nav-link", 'data-bs-toggle': "modal" %>
             </li>
           </ul>
           <form class="position-relative mt-2">

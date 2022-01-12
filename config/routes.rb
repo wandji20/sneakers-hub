@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users, only: [:create, :update]
   resources :order_items, except: [:new ]
   resources :sneakers, only: [:index, :show]
   root to: 'pages#home'
