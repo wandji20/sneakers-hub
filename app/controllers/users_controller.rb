@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash.now[:notice] = 'Account Successfully Created'
+      login(@user)
       location = session[:previous_path] || root_path
       redirect_to location
     else

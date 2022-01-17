@@ -30,7 +30,10 @@ class OrderItemsController < ApplicationController
       end
     else
       flash.now[:alert] = 'Something went wrong'
-      render turbo_stream: turbo_stream.update('alert', partial: 'shared/alert')
+      render turbo_stream: [
+        turbo_stream.update('alert', partial: 'shared/alert'),
+        turbo_stream.update('notice', partial: 'shared/notice')
+      ]
     end
   end
 

@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
-  before_action :load_order, :set_brands_and_genders, :load_order_items
-
   include Pagy::Backend
+  include SessionsHelper
+  
+  before_action :load_order, :set_brands_and_genders, :load_order_items
 
   private
 
@@ -21,10 +22,6 @@ class ApplicationController < ActionController::Base
   def load_order_items
     @order_items = @current_order.order_items.includes(:sneaker)
     @order_items_count = @order_items.count
-  end
-
-  def save_url
-    session[:previous_path] = request.original_fullpath
   end
 
   def set_brands_and_genders
