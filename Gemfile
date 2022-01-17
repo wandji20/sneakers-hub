@@ -30,6 +30,8 @@ gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 # Pagy
 gem 'pagy', '~> 5.6', '>= 5.6.9'
 
+gem 'sidekiq'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
