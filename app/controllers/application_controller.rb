@@ -12,9 +12,11 @@ class ApplicationController < ActionController::Base
   end
 
   def load_order
-    @current_order = if session[:order_id]
-                       Order.find(session[:order_id])
-                     else
+    @current_order = if logged_in?
+                       current_user.order || Order.new
+                     elsif session[:order_id]
+                       Order.find(session[:order_id])   
+                     else                     
                        Order.new
                      end
   end

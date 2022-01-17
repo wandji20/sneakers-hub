@@ -18,6 +18,9 @@ class OrderItemsController < ApplicationController
       end
     else
       flash.now[:alert] = 'Something went wrong'
+      p  '?????????????'
+      p @current_order
+      p @order_item
       render turbo_stream: turbo_stream.update('alert', partial: 'shared/alert')
     end
   end

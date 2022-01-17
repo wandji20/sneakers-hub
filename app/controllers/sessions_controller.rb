@@ -7,9 +7,9 @@ class SessionsController < ApplicationController
     if user&.authenticate(sessions_params[:password])
       login(user)
       remember_user(user)
-      location = session[:previous_path] || root_path
+      transfer_current_order(user)
       flash[:notice] = "Welcome"
-      redirect_to location
+      redirect_to redirect_location
     else
       flash.now[:alert] = 'Invalid Email/Password'
       render :new, status: :unprocessable_entity
@@ -29,4 +29,5 @@ class SessionsController < ApplicationController
   def remember_user(user)
     sessions_params[:remember_me] == '1' ? remember(user) : forget(user)
   end
+
 end

@@ -7,11 +7,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash.now[:notice] = 'Account Successfully Created'
+      session.delete(:order_id)
       login(@user)
+      transfer_current_order(@user)
       UserMailer.welcome_email(@user.id).deliver_later
-      location = session[:previous_path] || root_path
-      redirect_to location
+      flash.now[:notice] = 'Account Successfully Created'
+      redirect_to redirect_location
     else
       flash.now[:alert] = 'Something went wrong'
       respond_to do |format|

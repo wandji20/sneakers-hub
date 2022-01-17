@@ -22,6 +22,7 @@ module SessionsHelper
   def logout
     forget(current_user)
     session.delete(:user_id)
+    session[:order_id] = @current_user.order.id if @current_user&.order&.id
     @current_user = nil
   end
 
@@ -45,5 +46,10 @@ module SessionsHelper
     session[:previous_path] || root_path
   end
 
+  def transfer_current_order(user)
+    return if user.order
+    user.order = load_order
+    session.delete(:order_id)
+  end
 
 end
