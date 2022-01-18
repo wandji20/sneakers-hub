@@ -1,5 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  resources :orders, only: [:create]
   mount Sidekiq::Web => "/sidekiq" # mount Sidekiq::Web in your Rails app
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
@@ -12,5 +13,6 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get 'about', to: "pages#about"
   get 'checkout', to: "pages#checkout"
+  get 'shipping', to: 'pages#shipping'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

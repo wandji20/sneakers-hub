@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   before_save { self.email = email.downcase }
 
-  has_one :order, dependent: :destroy
+  has_many :orders
   has_secure_password
 
   validates :email, :password, presence: true

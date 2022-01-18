@@ -12,8 +12,9 @@ class ApplicationController < ActionController::Base
   end
 
   def load_order
+    # session.delete(:order_id)
     @current_order = if logged_in?
-                       current_user.order || Order.new
+                       current_user.orders.opened.take  
                      elsif session[:order_id]
                        Order.find(session[:order_id])   
                      else                     

@@ -9,8 +9,8 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-    @rder_item = @current_order.order_items.build(order_item_params)
-    if @current_order.save
+    @order_item = @current_order.order_items.build(order_item_params)
+    if @order_item.save
       session[:order_id] = @current_order.id
       flash.now[:notice] = "#{@sneaker.name} has been added to cart"
       respond_to do |format|
@@ -18,9 +18,6 @@ class OrderItemsController < ApplicationController
       end
     else
       flash.now[:alert] = 'Something went wrong'
-      p  '?????????????'
-      p @current_order
-      p @order_item
       render turbo_stream: turbo_stream.update('alert', partial: 'shared/alert')
     end
   end

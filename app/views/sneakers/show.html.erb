@@ -41,7 +41,7 @@
           <span><i class="bi bi-plus"></i></span>
         </button>
       <% end %>
-      <%= link_to checkout_path do %>
+      <%= link_to orders_path(sneaker_id: @sneaker.id), method: 'post' do %>
         <button class="btn bg-black text-light my-1 w-100">
           Buy it Now
         </button>

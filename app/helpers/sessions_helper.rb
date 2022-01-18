@@ -22,7 +22,7 @@ module SessionsHelper
   def logout
     forget(current_user)
     session.delete(:user_id)
-    session[:order_id] = @current_user.order.id if @current_user&.order&.id
+    session[:order_id] = @current_user.orders.opened.take.id if @current_user&.orders.opened.take&.id
     @current_user = nil
   end
 
@@ -47,9 +47,16 @@ module SessionsHelper
   end
 
   def transfer_current_order(user)
-    return if user.order
-    user.order = load_order
+    return if user.orders.opened.take
+    items_attributes = { order_items_attributes: current_order_items }
+    order = user.orders.build(items_attributes)
+    order.save
+    load_order
     session.delete(:order_id)
+  end
+
+  def current_order_items
+    @current_order.order_items.pluck(:sneaker_id, :quantity).map{ |pair| { sneaker_id: pair[0], quantity: pair[1]}}
   end
 
 end

@@ -10,20 +10,13 @@ class UsersController < ApplicationController
       session.delete(:order_id)
       login(@user)
       transfer_current_order(@user)
-      UserMailer.welcome_email(@user.id).deliver_later
-      flash.now[:notice] = 'Account Successfully Created'
+      # UserMailer.welcome_email(@user.id).deliver_later
+      flash[:notice] = 'Account Successfully Created'
       redirect_to redirect_location
     else
-      flash.now[:alert] = 'Something went wrong'
+      flash[:alert] = 'Something went wrong'
       respond_to do |format|
         format.html { render :new, status: :unprocessable_entity }
-        # format.turbo_stream do
-        #   render turbo_stream:
-        #     [
-        #       turbo_stream.update('alert', partial: 'shared/alert'),
-        #       turbo_stream.replace('new_user', partial: 'users/form', locals: { user: @user})
-        #     ]
-        # end
       end
     end
   end
