@@ -12,7 +12,7 @@
       <div >
         <%= link_to order_items_path, class: "text-dark text-decoration-none" do %>
           <%= turbo_frame_tag 'cart-badge' do %>
-            <%= render partial: 'shared/cart_badge', locals: { count: @order_items_count } %>
+            <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
           <% end %>
         <% end %>
         <span class="inline-block"><i class="fs-3 fw-bolder bi bi-search"></i></span>

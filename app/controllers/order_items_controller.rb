@@ -9,9 +9,9 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-    @order_item = @current_order.order_items.build(order_item_params)
-    if @order_item.save
-      session[:order_id] = @current_order.id
+    @order_item = @shopping_cart.order_items.build(order_item_params)
+    if @shopping_cart.save
+      session[:shopping_cart_id] = @shopping_cart.id
       flash.now[:notice] = "#{@sneaker.name} has been added to cart"
       respond_to do |format|
         format.turbo_stream
@@ -53,21 +53,21 @@ class OrderItemsController < ApplicationController
   end
 
   def set_order_item
-    @order_item = @order_items.find_by_id(params[:id])
+    @order_item = OrderItem.find_by_id(params[:id])
   end
 
   def set_sneaker
     @sneaker = Sneaker.find_by_id(order_item_params[:sneaker_id])
   end
 
-  def order_item_is_in_order?
-    sneaker = @order_items.where('sneaker_id = ?', order_item_params[:sneaker_id].to_i).take
+  def order_item_is_in_cart?
+    sneaker = @shopping_cart_items.where('sneaker_id = ?', order_item_params[:sneaker_id].to_i).take
     !!sneaker
   end
 
   def verify_order_item
     # rubocop:disable  Style/GuardClause
-    if order_item_is_in_order?
+    if order_item_is_in_cart?
       flash.now[:alert] = "#{@sneaker.name.capitalize} is already in cart"
       render turbo_stream: turbo_stream.update('alert', partial: 'shared/alert')
     end
@@ -75,6 +75,6 @@ class OrderItemsController < ApplicationController
   end
 
   def set_order_total
-    @order_items.sum(:sub_total)
+    @shopping_cart_items.sum(:sub_total)
   end
 end

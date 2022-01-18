@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_18_111559) do
+ActiveRecord::Schema.define(version: 2022_01_18_150119) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name"
@@ -27,13 +27,15 @@ ActiveRecord::Schema.define(version: 2022_01_18_111559) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.integer "order_id", null: false
-    t.integer "sneaker_id", null: false
+    t.integer "order_id"
+    t.integer "sneaker_id"
     t.float "sub_total"
     t.integer "quantity", default: 1
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "shopping_cart_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["shopping_cart_id"], name: "index_order_items_on_shopping_cart_id"
     t.index ["sneaker_id"], name: "index_order_items_on_sneaker_id"
   end
 
@@ -46,10 +48,10 @@ ActiveRecord::Schema.define(version: 2022_01_18_111559) do
   end
 
   create_table "shopping_carts", force: :cascade do |t|
-    t.string "references"
-    t.string "user"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_shopping_carts_on_user_id"
   end
 
   create_table "sneakers", force: :cascade do |t|
@@ -81,6 +83,7 @@ ActiveRecord::Schema.define(version: 2022_01_18_111559) do
 
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "sneakers"
+  add_foreign_key "shopping_carts", "users"
   add_foreign_key "sneakers", "brands"
   add_foreign_key "sneakers", "genders"
 end

@@ -9,8 +9,8 @@ class UsersController < ApplicationController
     if @user.save
       session.delete(:order_id)
       login(@user)
-      transfer_current_order(@user)
-      UserMailer.welcome_email(@user.id).deliver_later
+      transfer_shopping_cart(@user)
+      # UserMailer.welcome_email(@user.id).deliver_later
       flash[:notice] = 'Account Successfully Created'
       redirect_to redirect_location
     else

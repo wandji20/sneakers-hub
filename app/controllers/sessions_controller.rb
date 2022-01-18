@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if user&.authenticate(sessions_params[:password])
       login(user)
       remember_user(user)
-      transfer_current_order(user)
+      transfer_shopping_cart(user)
       flash[:notice] = "Welcome"
       redirect_to redirect_location
     else

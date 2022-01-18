@@ -1,7 +1,7 @@
 <%= turbo_stream.remove(@order_item) %>
 <%= turbo_stream.update('cart-badge') do %>
-  <%= render partial: 'shared/cart_badge', locals: { count: @order_items.count} %>
+  <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items.count} %>
 <% end %>
 <%= turbo_stream.update('total_price') do %>
-  <%= render partial: 'order_items/total_order_price', locals: { total: @order_items.sum(:sub_total) } %>
+  <%= render partial: 'order_items/total_order_price', locals: { total: @shopping_cart_items.sum(:sub_total) } %>
 <% end %>

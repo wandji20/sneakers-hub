@@ -9,19 +9,13 @@ class PagesController < ApplicationController
   def checkout; end
 
   def shipping
-    @order =  set_order
-    p '>>>>>>>>>>>'
-    p @order
-    p params
   end
 
   def about; end
   private
   def set_order
     if params[:order_id]
-      Order.find_by_id(params[:order_id])
-    else
-      @current_order
+      @order = Order.find_by_id(params[:order_id])
     end
   end
 end
