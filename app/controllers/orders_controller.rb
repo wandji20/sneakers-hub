@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :set_order
-  
+  before_action :set_order, only: [:create]
+
   def create
     if @order.save
       redirect_to shipping_path(order_id: @order.id)
@@ -9,6 +9,8 @@ class OrdersController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
   end
+
+  
 
   def set_order
     if logged_in?
