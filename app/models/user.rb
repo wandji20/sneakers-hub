@@ -5,6 +5,7 @@ class User < ApplicationRecord
   before_save { self.email = email.downcase }
 
   has_many :orders
+  has_one :shopping_cart
   has_secure_password
 
   validates :email, :password, presence: true

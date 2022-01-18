@@ -2,6 +2,7 @@ class OrderItem < ApplicationRecord
   before_save :set_sub_total
   belongs_to :order
   belongs_to :sneaker
+  belongs_to :shopping_cart
 
   validates :quantity, numericality: { greater_than_or_equal_to: 1 }
 
