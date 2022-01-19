@@ -1,7 +1,23 @@
 <%= render partial: 'orders/order_summary', locals: { order: @order } %>
 <section class="container-fluid mt-3">
-  <p class="text-center fw-bold fs-5">Payment feature coming soon</p>
-  <button class="btn w-100 bg-primary text-light p-1 mt-3">
-    Email My Order
-  </button>
+  <%= form_with url: checkout_path do |form|  %>
+    <div class="mb-2">
+      <%= form.label :name, class: 'form-label' %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="mb-2">
+      <%= form.label :email, class: 'form-label' %>
+      <%= form.email_field :email, class: 'form-control' %>
+    </div>
+    <div class="mb-2">
+      <%= form.label :street, class: 'form-label' %>
+      <%= form.text_field :street, class: 'form-control' %>
+    </div>
+    <div class="mb-2">
+      <%= form.label :city, class: 'form-label' %>
+      <%= form.text_field :city, class: 'form-control' %>
+    </div>
+    <%= submit_tag 'Email My Order', class: 'btn w-100 bg-primary text-light p-1 mb-1' %>
+  <% end %>
+  
 </section>

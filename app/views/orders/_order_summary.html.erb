@@ -1,10 +1,16 @@
-<div class="container d-flex justify-content-between bg-light py-2 border">
-  <div>
-    <i class= "bi bi-cart"></i>
+<div class="container d-flex flex-column bg-light py-2 border ">
+  <div class="accordion-button collapsed w-50 p-0 bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+    <i class= "bi bi-cart me-2"></i>
     <span>Order Summary</span>
   </div>
-  <div>
-  <span>Total: </span>
-  <span><%= order.total %></span>
+  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body ">
+        <%= render partial: 'orders/order_item_summary', collection: order.order_items, as: :order_item %>
+      </div>
+    </div>
+
+  <div class="align-self-end">
+    <span>Total: </span>
+    <span>$<%= order.total %></span>
   </div>
 </div>
