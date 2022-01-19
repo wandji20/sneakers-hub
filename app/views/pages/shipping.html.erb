@@ -1,6 +1,7 @@
 <%= render partial: 'orders/order_summary', locals: { order: @order } %>
 <section class="container-fluid mt-3">
-  <%= form_with url: checkout_path do |form|  %>
+  <%= form_with url: checkout_path, remote: true do |form|  %>
+    <%= form.hidden_field :order_id, value: @order.id %>
     <div class="mb-2">
       <%= form.label :name, class: 'form-label' %>
       <%= form.text_field :name, class: 'form-control' %>

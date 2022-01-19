@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create]
   root to: 'pages#home'
   get 'about', to: "pages#about"
-  get 'checkout', to: "pages#checkout"
+  post 'checkout', to: "pages#checkout"
   get 'shipping', to: 'pages#shipping'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
