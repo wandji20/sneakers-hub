@@ -7,14 +7,11 @@ class PopulateDatabaseWorker
 
   def get_sneakers
     begin
-      p 'Starting Request'
       server = HTTP.headers("x-rapidapi-host": ENV['RAPIDAPI_HOST'],
         "x-rapidapi-key": ENV['RAPIDAPI_KEY'])
         .get(ENV['URL'])
       response = server.parse
-      p 'Request Completed'
     rescue => exception
-      puts exception
       puts exception
     else
       response['results']   

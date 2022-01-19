@@ -61,7 +61,7 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "sneakers_hub_production"
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   host = ENV['APP_URL']
 
@@ -73,6 +73,7 @@ Rails.application.configure do
     user_name: ENV['APP_USERNAME'],
     password: ENV['APP_PASSWORD'],
     authentication: 'plain',
+    domain: 'heroku.com',
     enable_starttls_auto: true
   }
 
