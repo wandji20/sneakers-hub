@@ -5,10 +5,12 @@
 
 def get_sneakers
   begin
+    p 'Starting Request'
     server = HTTP.headers("x-rapidapi-host": ENV['RAPIDAPI_HOST'],
       "x-rapidapi-key": ENV['RAPIDAPI_KEY'])
       .get(ENV['URL'])
     response = server.parse
+    p 'Request Completed'
   rescue => exception
     puts exception
   else
@@ -70,4 +72,4 @@ def create_sneaker(shoe_id, title, name, colors, release_date, price, image_url,
   )
 end
 
-# populate_database
+populate_database
