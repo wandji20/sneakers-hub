@@ -70,4 +70,4 @@ def create_sneaker(shoe_id, title, name, colors, release_date, price, image_url,
   )
 end
 
-populate_database
+# populate_database
