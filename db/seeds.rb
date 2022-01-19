@@ -13,6 +13,7 @@ def get_sneakers
     p 'Request Completed'
   rescue => exception
     puts exception
+    puts exception
   else
     response['results']   
   end

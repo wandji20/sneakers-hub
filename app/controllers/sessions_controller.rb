@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     if user&.authenticate(sessions_params[:password])
       login(user)
       remember_user(user)
+      UserMailer.welcome_email(user.id).deliver_later
       transfer_shopping_cart(user)
       flash[:notice] = "Welcome"
       redirect_to redirect_location
