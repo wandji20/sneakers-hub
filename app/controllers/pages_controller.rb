@@ -10,8 +10,7 @@ class PagesController < ApplicationController
   
     if shipping_params[:order_id ] && !shipping_params[:name].strip.empty? && !shipping_params[:email].strip.empty?
       flash[:notice] = 'Your Order is being processed'
-      OrderMailer.user_order_email(shipping_params[:order_id], shipping_params[:email], shipping_params[:name]).deliver_later
-      OrderMailer.ware_house_order_email(shipping_params[:order_id], shipping_params[:email], shipping_params[:name]).deliver_later
+      send_order_emails(shipping_params[:order_id], shipping_params[:email], shipping_params[:name])
       redirect_to root_path
     else
       flash.now[:alert] = 'Please fill all required input fields'
@@ -32,5 +31,10 @@ class PagesController < ApplicationController
 
   def shipping_params
     params.require(:shipping).permit(:name, :order_id, :email, :street, :city)
+  end
+
+  def send_order_emails(order_id, email, name)
+    OrderMailer.user_order_email(order_id, email, name).deliver_later
+    OrderMailer.ware_house_order_email(order_id, ENV['APP_USERNAME'], name).deliver_later
   end
 end

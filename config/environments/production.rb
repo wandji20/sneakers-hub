@@ -61,6 +61,20 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "sneakers_hub_production"
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+  host = ENV['APP_URL']
+
+  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'example.com',
+    user_name: ENV['APP_USERNAME'],
+    password: ENV['APP_PASSWORD'],
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
 
   config.action_mailer.perform_caching = false
 
