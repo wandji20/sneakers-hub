@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2022_01_18_150119) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "brands", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -27,8 +30,8 @@ ActiveRecord::Schema.define(version: 2022_01_18_150119) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.integer "order_id"
-    t.integer "sneaker_id"
+    t.bigint "order_id"
+    t.bigint "sneaker_id"
     t.float "sub_total"
     t.integer "quantity", default: 1
     t.datetime "created_at", precision: 6, null: false
@@ -50,13 +53,13 @@ ActiveRecord::Schema.define(version: 2022_01_18_150119) do
   create_table "shopping_carts", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_shopping_carts_on_user_id"
   end
 
   create_table "sneakers", force: :cascade do |t|
-    t.integer "brand_id", null: false
-    t.integer "gender_id", null: false
+    t.bigint "brand_id", null: false
+    t.bigint "gender_id", null: false
     t.string "colors"
     t.string "name"
     t.date "release_date"

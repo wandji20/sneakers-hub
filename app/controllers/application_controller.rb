@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
   end
 
   def load_shopping_cart
-    # session.delete(:shopping_cart_id)
     @shopping_cart = if logged_in?
                        current_user.shopping_cart 
                      elsif session[:shopping_cart_id]
