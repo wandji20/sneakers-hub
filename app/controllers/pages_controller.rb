@@ -7,7 +7,16 @@ class PagesController < ApplicationController
   end
 
   def checkout
-    puts params
+  
+    if shipping_params[:order_id ] && !shipping_params[:name].strip.empty? && !shipping_params[:email].strip.empty?
+      flash[:notice] = 'Your Order is being processed'
+      OrderMailer.user_order_email(shipping_params[:order_id], shipping_params[:email], shipping_params[:name]).deliver_later
+      OrderMailer.ware_house_order_email(shipping_params[:order_id], shipping_params[:email], shipping_params[:name]).deliver_later
+      redirect_to root_path
+    else
+      flash.now[:alert] = 'Please fill all required input fields'
+      render turbo_stream: turbo_stream.update('alert', partial: 'shared/alert')
+    end
   end
 
   def shipping
@@ -19,5 +28,9 @@ class PagesController < ApplicationController
     if params[:order_id]
       @order = Order.find_by_id(params[:order_id])
     end
+  end
+
+  def shipping_params
+    params.require(:shipping).permit(:name, :order_id, :email, :street, :city)
   end
 end

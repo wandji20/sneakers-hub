@@ -1,0 +1,31 @@
+<h3>Hi, <%= @name %>!</h2>
+
+<p> Your order is being processed</p>
+<div>
+  <h3>Order#<%= @order.id %></h3>
+  <table style="width: 100%;">
+    <thead style="width: 100%;">
+      <tr style="display: flex; justify-content: space-between; width: 100%;">
+        <th style="width: 20%;"></th>
+        <th style="width: 40%;">Name</th>
+        <th style="width: 20%;">Quantity</th>
+        <th style="width: 20%;">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_items.each_with_index do |item, index| %>
+        <tr style="display: flex; justify-content: space-between; width: 100%;">
+          <td style="width: 20%; text-align: center;"><%= index + 1 %></td>
+          <td style="width: 40%; text-align: center;"><%= item.sneaker.name %></td>
+          <td style="width: 20%; text-align: center;"><%= item.quantity %></td>
+          <td style="width: 20%; text-align: center;"><%= item.sub_total %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<p style="display: flex; margin-top: 10px; width: 93%; justify-content: end; padding-right: 20px;">
+  <span>Total:</span>
+  <span style="margin-left: 10px; ">$<%= @order.total %></span>
+</p>
+<p> Kindly complete payment to receive your order</p>

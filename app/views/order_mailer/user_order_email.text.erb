@@ -1,0 +1,16 @@
+Hi, <%= @name %>!
+
+Your order is being processed
+  
+  Order#<%= @order.id %>
+
+        Name   Quantity    Price
+
+<% @order.order_items.each_with_index do |item, index| %>
+  <%= index + 1 %>  <%= item.sneaker.name %>   <%= item.quantity %>   <%= item.sub_total %>
+
+<% end %>
+
+                                                        Total:  $<%= @order.total %>
+
+Kindly complete payment to receive your order
