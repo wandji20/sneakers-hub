@@ -1,26 +1,25 @@
 class PopulateDatabaseWorker
   include Sidekiq::Worker
 
-  def perform(*args)
+  def perform(*_args)
     populate_database
   end
 
-  def get_sneakers
-    begin
-      server = HTTP.headers("x-rapidapi-host": ENV['RAPIDAPI_HOST'],
-        "x-rapidapi-key": ENV['RAPIDAPI_KEY'])
-        .get(ENV['URL'])
-      response = server.parse
-    rescue => exception
-      puts exception
-    else
-      response['results']   
-    end
+  def fetch_sneakers
+    server = HTTP.headers('x-rapidapi-host': ENV['RAPIDAPI_HOST'],
+                          'x-rapidapi-key': ENV['RAPIDAPI_KEY'])
+      .get(ENV['URL'])
+    response = server.parse
+  rescue StandardError => e
+    puts e
+  else
+    response['results']
   end
-  
+
   def populate_database
-    sneakers = get_sneakers
+    sneakers = fetch_sneakers
     return if sneakers.nil?
+
     sneakers.each do |sneaker|
       shoe_id = sneaker['id']
       brand_name = sneaker['brand']
@@ -28,48 +27,49 @@ class PopulateDatabaseWorker
       title = sneaker['title']
       name = sneaker['name']
       release_date = sneaker['releaseDate']
-      price = sneaker['retailPrice'] == 0 ? 110 : sneaker['retailPrice']
+      price = (sneaker['retailPrice']).zero? ? 110 : sneaker['retailPrice']
       colors = sneaker['colorWay']
       image_url = sneaker['media']['imageUrl'] || sneaker['media']['smallImageUrl'] || sneaker['media']['thumbUrl']
-      if image_url
-        ActiveRecord::Base.transaction do 
-          brand = create_brand(brand_name)
-          gender = create_gender(gender_name)
-          create_sneaker(
-            shoe_id, title, name, colors, release_date, price, image_url, brand, gender
-            )
-        end
+      next unless image_url
+
+      ActiveRecord::Base.transaction do
+        brand = create_brand(brand_name)
+        gender = create_gender(gender_name)
+        create_sneaker(
+          { shoe_id: shoe_id,
+            title: title,
+            colors: colors,
+            name: name,
+            release_date: release_date,
+            price: price,
+            image_url: image_url,
+            brand: brand,
+            gender: gender }
+        )
       end
     end
   end
-  
+
   def create_brand(name)
     brand = Brand.find_by_name(name.downcase)
-    return brand  unless brand.nil?
+    return brand unless brand.nil?
+
     Brand.create!(name: name.downcase)
   end
-  
+
   def create_gender(name)
     gender = Gender.find_by_name(name)
     return gender unless gender.nil?
+
     Gender.create!(name: name.downcase)
-  
   end
-  
-  def create_sneaker(shoe_id, title, name, colors, release_date, price, image_url, brand, gender)
-    sneaker = Sneaker.find_by_shoe_id(shoe_id)
+
+  def create_sneaker(sneaker_params)
+    sneaker = Sneaker.find_by_shoe_id(sneaker_params[:shoe_id])
     return unless sneaker.nil?
+
     Sneaker.create!(
-      shoe_id: shoe_id,
-      title: title,
-      colors: colors,
-      name: name,
-      release_date: release_date,
-      price: price,
-      image_url: image_url,
-      brand: brand,
-      gender: gender
+      sneaker_params
     )
   end
-  
 end

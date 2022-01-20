@@ -1,14 +1,13 @@
 class PagesController < ApplicationController
   before_action :save_url
   before_action :set_order, only: :shipping
-  
+
   def home
     @sneakers = Sneaker.release_date.take(10)
   end
 
   def checkout
-  
-    if shipping_params[:order_id ] && !shipping_params[:name].strip.empty? && !shipping_params[:email].strip.empty?
+    if shipping_params[:order_id] && !shipping_params[:name].strip.empty? && !shipping_params[:email].strip.empty?
       flash[:notice] = 'Your Order is being processed'
       send_order_emails(shipping_params[:order_id], shipping_params[:email], shipping_params[:name])
       redirect_to root_path
@@ -18,15 +17,14 @@ class PagesController < ApplicationController
     end
   end
 
-  def shipping
-  end
+  def shipping; end
 
   def about; end
+
   private
+
   def set_order
-    if params[:order_id]
-      @order = Order.find_by_id(params[:order_id])
-    end
+    @order = Order.find_by_id(params[:order_id]) if params[:order_id]
   end
 
   def shipping_params

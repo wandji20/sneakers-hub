@@ -11,15 +11,14 @@ class OrdersController < ApplicationController
   end
 
   private
-  def initialize_order
-    if params[:sneaker_id] && logged_in?
-      @new_order = current_user.orders.build(order_items_attributes: [{ sneaker_id: params[:sneaker_id] }])
-    elsif params[:sneaker_id]
-      @new_order = Order.new(order_items_attributes: [{ sneaker_id: params[:sneaker_id] }])
-    else
-      @new_order = Order.new(order_items_attributes: shopping_cart_items)
-    end
 
+  def initialize_order
+    @new_order = if params[:sneaker_id] && logged_in?
+                   current_user.orders.build(order_items_attributes: [{ sneaker_id: params[:sneaker_id] }])
+                 elsif params[:sneaker_id]
+                   Order.new(order_items_attributes: [{ sneaker_id: params[:sneaker_id] }])
+                 else
+                   Order.new(order_items_attributes: shopping_cart_items)
+                 end
   end
-  
 end

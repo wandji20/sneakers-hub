@@ -1,15 +1,13 @@
 class SessionsController < ApplicationController
-  def new
-  end
-  
+  def new; end
+
   def create
     user = User.find_by_email(sessions_params[:email])
     if user&.authenticate(sessions_params[:password])
       login(user)
       remember_user(user)
-      UserMailer.welcome_email(user.id).deliver_later
       transfer_shopping_cart(user)
-      flash[:notice] = "Welcome"
+      flash[:notice] = 'Welcome'
       redirect_to redirect_location
     else
       flash.now[:alert] = 'Invalid Email/Password'
@@ -22,7 +20,9 @@ class SessionsController < ApplicationController
     flash.now[:notice] = 'You have successfully logout'
     redirect_to redirect_location
   end
+
   private
+
   def sessions_params
     params.require(:session).permit(:email, :password, :remember_me)
   end
@@ -30,5 +30,4 @@ class SessionsController < ApplicationController
   def remember_user(user)
     sessions_params[:remember_me] == '1' ? remember(user) : forget(user)
   end
-
 end

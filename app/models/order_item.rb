@@ -1,6 +1,6 @@
 class OrderItem < ApplicationRecord
   before_save :set_sub_total
-  
+
   belongs_to :order, optional: true
   belongs_to :sneaker
   belongs_to :shopping_cart, optional: true

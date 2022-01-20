@@ -4,7 +4,7 @@ module SessionsHelper
       @current_user ||= User.find_by(id: session[:user_id])
     elsif cookies.encrypted[:user_id]
       user = User.find_by(id: cookies.encrypted[:user_id])
-      if user && user.authenticated?(cookies[:remember_token])
+      if user&.authenticated?(cookies[:remember_token])
         log_in user
         @current_user = user
       end
@@ -48,14 +48,14 @@ module SessionsHelper
 
   def transfer_shopping_cart(user)
     return if user.shopping_cart
+
     user.shopping_cart = @shopping_cart
     session.delete(:shopping_cart_id)
   end
 
   def shopping_cart_items
     @shopping_cart.order_items.pluck(:sneaker_id, :quantity).map do |pair|
-      { sneaker_id: pair[0], quantity: pair[1]}
+      { sneaker_id: pair[0], quantity: pair[1] }
     end
   end
-
 end

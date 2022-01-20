@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   include SessionsHelper
-  
+
   before_action :load_shopping_cart, :set_brands_and_genders, :load_cart_items
 
   private
@@ -13,10 +13,10 @@ class ApplicationController < ActionController::Base
 
   def load_shopping_cart
     @shopping_cart = if logged_in?
-                       current_user.shopping_cart 
+                       current_user.shopping_cart
                      elsif session[:shopping_cart_id]
-                       ShoppingCart.find(session[:shopping_cart_id])   
-                     else                     
+                       ShoppingCart.find(session[:shopping_cart_id])
+                     else
                        ShoppingCart.new
                      end
   end
