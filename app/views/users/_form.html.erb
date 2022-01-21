@@ -1,0 +1,25 @@
+<%= form_with model: user do |form| %>
+  <div class="mb-3">
+    <%= form.label :email, class: 'form-label' %>
+    <%= form.email_field :email, class: 'form-control', 'aria-describedby': "emailHelp"  %>
+    <% if user.errors[:email] %>
+      <ul class="list-group text-danger mx-2">
+        <% user.errors[:email].each do |error| %>
+          <li class="list-group">Email <%= error %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :password, class: 'form-label' %>
+    <%= form.password_field :password, class: 'form-control' %>
+    <% if user.errors[:password] %>
+      <ul class="list-group text-danger mx-2">
+        <% user.errors[:password].each do |error| %>
+          <li class="list-group">Password <%= error %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  <%= form.submit class: "btn btn-primary w-100" %>
+<% end %>

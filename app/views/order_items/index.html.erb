@@ -1,11 +1,11 @@
 <section class="container-fluid">
    
   <h3 class="text-center mt-2 fw-light">Shopping Cart</h3>
-    <% if @order_items&.size > 0 %>
+    <% if @shopping_cart_items&.size > 0 %>
   
       <%= turbo_frame_tag 'order_items' do %>
         <div class="container-fluid border order-items">
-          <%= render @order_items %>
+          <%= render @shopping_cart_items %>
         </div>
       <% end %>
       <div class="mt-2 fixed-bottom bg-light container-fluid order-summary">
@@ -13,15 +13,15 @@
           <%= render partial: 'order_items/total_order_price', locals: { total: @total} %>
         <% end %>
         <div class="col d-flex justify-content-between mb-3 order-buttons ">
-          <%= link_to checkout_path, class: 'col-6' do %>
-            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+          <%= link_to orders_path, method: :post, class: 'col-6' do %>
+            <button type="button" class="btn btn-dark">
               <span>Check Out</span>
               <span><i class="bi bi-chevron-right"></i></span>
             </button>
           <% end %>
 
           <%= link_to sneakers_path, class: 'col-6' do %>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <button type="button" class="btn btn-secondary">
               Continue Shopping
             </button>
           <% end %>

@@ -12,11 +12,10 @@
       <div >
         <%= link_to order_items_path, class: "text-dark text-decoration-none" do %>
           <%= turbo_frame_tag 'cart-badge' do %>
-            <%= render partial: 'shared/cart_badge', locals: { count: @order_items_count } %>
+            <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
           <% end %>
         <% end %>
-        <span class=""><i class="fs-3 fw-bolder bi bi-search"></i></span>
-      </div>
+        <span class="inline-block"><i class="fs-3 fw-bolder bi bi-search"></i></span>
       <div class="offcanvas offcanvas-start w-75" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
           <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -45,9 +44,15 @@
             <li class="nav-item border-bottom">
               <%= link_to "Contact", '#', class: "nav-link" %>
             </li>
-            <li class="nav-item">
-              <%= link_to "Log in", '#', class: "nav-link" %>
-            </li>
+            <% if logged_in? %>
+              <li class="nav-item">
+                <%= link_to "log out", logout_path, class: "nav-link" %>
+              </li>
+            <% else %>  
+              <li class="nav-item">
+                <%= link_to "log in", login_path, class: "nav-link" %>
+              </li>
+            <% end %>
           </ul>
           <form class="position-relative mt-2">
             <input class="form-control me-2 position-absolute" type="search" placeholder="Search" >
@@ -59,5 +64,11 @@
       </div>
     </div>
   </nav>
+    <%= turbo_frame_tag 'alert' do %>
+      <%= render partial: 'shared/alert' %>
+    <% end %>
+    <%= turbo_frame_tag 'notice' do %>
+      <%= render partial: 'shared/notice' %>
+    <% end %>
 </header>
 <%= render 'shared/announcement' %>

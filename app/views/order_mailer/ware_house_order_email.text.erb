@@ -1,0 +1,14 @@
+<h3>New Order!</h2>
+
+Name: <%= @name %>
+
+Email:  <%= @email %>
+
+
+Order#<%= @order.id %>
+
+Name    Quantity      Price
+<% @order.order_items.each_with_index do |item, index| %>
+  <<%= index + 1 %>   <%= item.sneaker.name %>   <%= item.quantity %>  <%= item.sub_total %><
+<% end %>
+                                                    Total:   $<%= @order.total %>

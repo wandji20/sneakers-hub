@@ -1,7 +1,8 @@
 class SneakersController < ApplicationController
   before_action :set_sneaker, only: :show
   before_action :set_sort_option
-  before_action :save_url, only: :index
+  before_action :save_url
+
   def index
     @pagy, @sneakers = pagy(scoped_records)
     @sneakers.includes(:brand, :gender)

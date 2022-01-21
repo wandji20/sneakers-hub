@@ -1,0 +1,32 @@
+<div class="modal fade" id="login-toggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel">Log In</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render partial: 'users/form', locals: { user: User.new} %>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-target="#signup-toggle" data-bs-toggle="modal">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="signup-toggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel2">Sign Up</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Hide this modal and show the first with the button below.
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-target="#login-toggle" data-bs-toggle="modal">Log In</button>
+      </div>
+    </div>
+  </div>
+</div>

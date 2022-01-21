@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
-  before_action :load_order, :set_brands_and_genders, :load_order_items
   include Pagy::Backend
+  include SessionsHelper
+
+  before_action :load_shopping_cart, :set_brands_and_genders, :load_cart_items
 
   private
 
@@ -9,21 +11,19 @@ class ApplicationController < ActionController::Base
     records
   end
 
-  def load_order
-    @current_order = if session[:order_id]
-                       Order.find(session[:order_id])
+  def load_shopping_cart
+    @shopping_cart = if logged_in?
+                       current_user.shopping_cart
+                     elsif session[:shopping_cart_id]
+                       ShoppingCart.find(session[:shopping_cart_id])
                      else
-                       Order.new
+                       ShoppingCart.new
                      end
   end
 
-  def load_order_items
-    @order_items = @current_order.order_items.includes(:sneaker)
-    @order_items_count = @order_items.count
-  end
-
-  def save_url
-    session[:previous_path] = request.original_fullpath
+  def load_cart_items
+    @shopping_cart_items = @shopping_cart.order_items.includes(:sneaker)
+    @shopping_cart_items_count = @shopping_cart_items.count
   end
 
   def set_brands_and_genders
