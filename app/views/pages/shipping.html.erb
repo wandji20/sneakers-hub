@@ -1,24 +1,26 @@
-<%= render partial: 'orders/order_summary', locals: { order: @order } %>
 <section class="container-fluid mt-3">
-  <%= form_with url: checkout_path, scope: :shipping, local: true, class: 'col-md d-lg-flex flex-wrap g-md-2' do |form|  %>
-    <%= form.hidden_field :order_id, value: @order.id %>
-    <div class="mb-2 col-lg-5">
-      <%= form.label :name, class: 'form-label' %>
-      <%= form.text_field :name, class: 'form-control  primary-font-size' %>
-    </div>
-    <div class="mb-2 col-lg-5">
-      <%= form.label :email, class: 'form-label' %>
-      <%= form.email_field :email, class: 'form-control  primary-font-size' %>
-    </div>
-    <div class="mb-2 col-lg-5">
-      <%= form.label :street, class: 'form-label' %>
-      <%= form.text_field :street, class: 'form-control  primary-font-size' %>
-    </div>
-    <div class="mb-2 col-lg-5">
-      <%= form.label :city, class: 'form-label' %>
-      <%= form.text_field :city, class: 'form-control  primary-font-size' %>
-    </div>
-    <%= submit_tag 'Email My Order', class: 'btn w-100 bg-primary text-light p-1 mt-3 primary-font-size' %>
-  <% end %>
+  <div class="col col-md-8 col-lg-6 m-auto">
+    <%= render partial: 'orders/order_summary', locals: { order: @order } %>
+    <%= form_with url: checkout_path, scope: :shipping, local: true, class: '' do |form|  %>
+      <%= form.hidden_field :order_id, value: @order.id %>
+      <div class="mb-2">
+        <%= form.label :name, class: 'form-label' %>
+        <%= form.text_field :name, class: 'form-control  primary-font-size' %>
+      </div>
+      <div class="mb-2">
+        <%= form.label :email, class: 'form-label' %>
+        <%= form.email_field :email, class: 'form-control  primary-font-size' %>
+      </div>
+      <div class="mb-2">
+        <%= form.label :street, class: 'form-label' %>
+        <%= form.text_field :street, class: 'form-control  primary-font-size' %>
+      </div>
+      <div class="mb-2">
+        <%= form.label :city, class: 'form-label' %>
+        <%= form.text_field :city, class: 'form-control  primary-font-size' %>
+      </div>
+      <%= submit_tag 'Email My Order', class: 'btn w-100 bg-primary text-light p-1 mt-3 primary-font-size' %>
+    <% end %>
+  </div>
   
 </section>
