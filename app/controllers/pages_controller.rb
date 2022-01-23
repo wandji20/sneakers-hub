@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   def checkout
     if shipping_params[:order_id] && !shipping_params[:name].strip.empty? && !shipping_params[:email].strip.empty?
       flash[:notice] = 'Your Order is being processed'
-      send_order_emails(shipping_params[:order_id], shipping_params[:email], shipping_params[:name])
+      # send_order_emails(shipping_params[:order_id], shipping_params[:email], shipping_params[:name])
       redirect_to root_path
     else
       flash.now[:alert] = 'Please fill all required input fields'
