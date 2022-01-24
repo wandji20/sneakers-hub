@@ -1,24 +1,59 @@
-# README
+# Sneakers Hub
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> An e-commerce platform for sneakers with a shopping cart functionality and email notifications(In the background) for signing up and creating orders.
 
-Things you may want to cover:
+## Built With
 
-* Ruby version
+- Ruby on Rails
+- Redis
+- Sidekiq
+- Turbo Rails
+- Bootstrap
+- HTML/CSS
 
-* System dependencies
+## Live Demo
 
-* Configuration
+[Live Demo Link](https://sneakers-hub.herokuapp.com/)
 
-* Database creation
+## Getting Started
 
-* Database initialization
+To get a local copy up and running follow these simple example steps.
 
-* How to run the test suite
+### Prerequisites
 
-* Services (job queues, cache servers, search engines, etc.)
+- ruby v2.7 and above
+- rails v6 and above
+- Redis installed locally
 
-* Deployment instructions
+### Setup
 
-* ...
+> Open your terminal and run the following commands <br> > `git clone https://github.com/wandji20/sneakers-hub.git` <br> > `cd sneakers-hub` <br>
+
+### Install
+
+run `bundle install`
+
+### Usage
+
+run `rails s` <br>
+Open `localhoost:3000` to see project in action
+
+##
+
+## Author
+
+👤 Wandji Bertrand
+
+- Github: [@wandji20](https://github.com/wandji20)
+- Twitter: [@wandjibertrand](https://twitter.com/wandjibertrand)
+- Linkedin: [Linkedin](https://www.linkedin.com/in/wandji-bertrand/)
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
