@@ -1,5 +1,9 @@
 <% if flash[:alert] %>
-  <p class="col text-center bg-white text-danger bg-light py-2">
-    <%= flash[:alert] %>
-  </p>
+  <div class="alert alert-danger rounded-0 alert-dismissible fade show" role="alert">
+    <p class="col text-center text-danger">
+      <%= flash[:alert] %>
+    </p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
 <% end %>
+

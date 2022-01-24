@@ -1,27 +1,27 @@
 <section class="container-fluid">
    
-  <h3 class="text-center mt-2 fw-light">Shopping Cart</h3>
+  <h3 class="text-center mt-2 fw-bold fs-3">Shopping Cart</h3>
     <% if @shopping_cart_items&.size > 0 %>
   
       <%= turbo_frame_tag 'order_items' do %>
-        <div class="container-fluid border order-items">
+        <div class="container-fluid order-items " id="order-items">
           <%= render @shopping_cart_items %>
         </div>
       <% end %>
-      <div class="mt-2 fixed-bottom bg-light container-fluid order-summary">
+      <div class="mt-2 fixed-bottom bg-light container-fluid order-summary pb-3">
         <%= turbo_frame_tag 'total_price' do %>
           <%= render partial: 'order_items/total_order_price', locals: { total: @total} %>
         <% end %>
-        <div class="col d-flex justify-content-between mb-3 order-buttons ">
-          <%= link_to orders_path, method: :post, class: 'col-6' do %>
-            <button type="button" class="btn btn-dark">
+        <div class="col d-flex justify-content-between order-buttons">
+          <%= link_to orders_path, method: :post, class: 'col-5 text-center' do %>
+            <button type="button" class="btn btn-dark col-12 primary-font-size">
               <span>Check Out</span>
               <span><i class="bi bi-chevron-right"></i></span>
             </button>
           <% end %>
 
-          <%= link_to sneakers_path, class: 'col-6' do %>
-            <button type="button" class="btn btn-secondary">
+          <%= link_to sneakers_path, class: 'col-6 text-center' do %>
+            <button type="button" class="btn col-12  primary-font-size btn-secondary">
               Continue Shopping
             </button>
           <% end %>

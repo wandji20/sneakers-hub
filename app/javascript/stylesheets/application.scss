@@ -45,18 +45,6 @@ p {
   box-shadow: none;
 }
 
-// .cart-badge:after {
-//   content: "";
-//   position: absolute;
-//   width: 9px;
-//   height: 9px;
-//   display: block;
-//   background: #141414;
-//   top: -5px;
-//   right: 2px;
-//   border-radius: 50%;
-// }
-
 .cart-badge {
   left: 10px;
   bottom: 18px;
@@ -68,4 +56,74 @@ p {
 
 .order-items {
   margin-bottom: 12vh;
+}
+
+.sneaker-background {
+  height: 240px;
+}
+
+.logo {
+  height: 49px;
+}
+
+@media (min-width: 768px) {
+  .primary-font-size {
+    font-size: calc(0.8rem + 0.6vw);
+  }
+
+  .announcement {
+    margin-top: 77px;
+  }
+
+  .logo {
+    height: 60px;
+  }
+
+  .order-summary {
+    height: 13vh;
+  }
+
+  .fs-3 {
+    font-size: calc(1.1rem + 0.6vw) !important;
+  }
+
+  // .order_item {
+  //   width: 75%;
+  // }
+
+  .accordion-button::after {
+    width: 2.25rem;
+    height: 2.25rem;
+    background-size: 2.25rem;
+  }
+
+  .sneaker-background {
+    height: 320px;
+  }
+
+  // .cart-badge {
+  //   left: 10px;
+  //   bottom: 25px;
+  // }
+}
+
+@media (min-width: 992px) {
+  .logo {
+    height: 80px;
+  }
+
+  .order-summary {
+    height: 15vh;
+  }
+  // .order_item {
+  //   width: 50%;
+  // }
+
+  .announcement {
+    margin-top: 97px;
+  }
+
+  .sneaker-image {
+    height: 500px;
+  }
 }

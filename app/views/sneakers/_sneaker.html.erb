@@ -1,14 +1,15 @@
-<%= link_to sneaker, class: "p-1 my-1 bg-white text-decoration-none text-black" do %>
-  <article class="col">
-    <div>
-      <%= image_tag sneaker.image_url, class: 'img-fluid', alt: sneaker.image_url %>
+<%= link_to sneaker, class: " text-decoration-none text-black col-12 col-sm-6 col-lg-4 col-xl-3" do %>
+  <article class="m-1 bg-white">
+    <div class="sneaker-background" style="background: url('<%= image_url sneaker.image_url %>');   background-repeat: no-repeat; background-position: center; background-size: 100% 240px">
+
     </div>
-    <p class="d-flex justify-content-between py-1">
-      <span class="inline-block"><%= sneaker.name %></span>
+    <p class="d-flex justify-content-between p-1">
+      <span class="d-inline-block d-lg-none"><%= truncate(sneaker.name, length: 23) %></span>
+      <span class="d-none d-lg-inline-block"><%= truncate(sneaker.name, length: 15) %></span>
       <span class="inline-block">$<%= sneaker.price %></span>
     </p>
-    <p class="fw-light">
-      <span>Release Date:</span>
+    <p class="fw-light p-1">
+      <span>Release:</span>
       <span><%= sneaker.release_date&.strftime('%a %d %b %Y') %></span>
     </p>
   </article>

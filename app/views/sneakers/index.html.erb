@@ -1,14 +1,14 @@
-<div class="container-fluid pt-3 pb-4">
-  <h3 class="connect-title text-center position-relative fw-normal">Sneakers</h3>
+<div class="container-fluid pt-3 pb-4 col-md-6">
+  <h3 class="connect-title text-center position-relative fw-normal primary-font-size">Sneakers</h3>
   <div class="dropdown mt-4 border rounded ">
-    <button class="btn w-100 dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    <button class="btn w-100 dropdown-toggle d-flex justify-content-between align-items-center  primary-font-size" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
       <div>
         <span>Sort By</span>
         <span class="ms-2">-</span>
         <span class="ms-2"><%= @sort_option %></span>
       </div>
     </button>
-    <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
+    <ul class="dropdown-menu w-100 primary-font-size" aria-labelledby="dropdownMenuButton1">
       <li>
         <%= link_to 'All Sneakers', sneakers_path, class: 'dropdown-item' %>
       </li>
@@ -26,11 +26,11 @@
   </div>
 </div>
 
-<section class="d-flex flex-column secondary-bg container-fluid py-1">
+<section class="d-flex flex-wrap secondary-bg container-fluid py-1">
   <%= render @sneakers %>
 </section>
 <div class="container-fluid pt-2">
-  <div class="col-12">
+  <div class="col-12  primary-font-size">
     <%== pagy_bootstrap_nav(@pagy) %>
   </div>
 </div>

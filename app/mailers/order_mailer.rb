@@ -22,6 +22,6 @@ class OrderMailer < ApplicationMailer
     @email = email
     @order = Order.find_by_id(order_id)
 
-    mail to: @email
+    mail to: ENV['APP_USERNAME']
   end
 end
