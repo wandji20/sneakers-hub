@@ -1,6 +1,7 @@
 # Sneakers Hub
 
-> An e-commerce platform for sneakers with a shopping cart functionality and email notifications(In the background) for signing up and creating orders.
+> An e-commerce platform for sneakers with a shopping cart functionality and email notifications(In the background) for signing up and creating orders. <br>
+> Visitors have the ability to shop sneakers and have their orders sent to via email. Also, each logged in users' session has the option to be remembered and managed across multiple browser windows.
 
 ## Built With
 
