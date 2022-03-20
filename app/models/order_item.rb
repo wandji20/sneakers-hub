@@ -7,8 +7,10 @@ class OrderItem < ApplicationRecord
 
   validates :quantity, numericality: { greater_than_or_equal_to: 1 }
 
+  delegate :price, to: :sneaker, prefix: :unit
+
   def sub_total
-    quantity * sneaker.price
+    quantity * unit_price
   end
 
   def set_sub_total
