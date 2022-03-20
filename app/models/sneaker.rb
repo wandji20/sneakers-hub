@@ -10,5 +10,4 @@ class Sneaker < ApplicationRecord
   scope :increasing_price, -> { order(price: :asc) }
   scope :decreasing_price, -> { order(price: :desc) }
   scope :release_date, -> { order(release_date: :desc) }
-
 end
