@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_brands_and_genders
-    @brands = Brand.all
-    @genders = Gender.all
+    @brands = Brand.pluck(:name)
+    @genders = Gender.pluck(:name)
   end
 end

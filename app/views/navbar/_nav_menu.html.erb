@@ -14,7 +14,9 @@
               Brand
             </a>
             <ul class="dropdown-menu border-0 primary-font-size position-absolute" aria-labelledby="offcanvasNavbarDropdown">
-              <%= render partial: 'shared/dropdown_items', collection: @brands, as: :item %>
+              <% @brands.each do |brand| %>
+                <%= render 'shared/dropdown_items', value: brand, model_name: 'brand'  %>
+              <% end %>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -22,7 +24,9 @@
               Gender
             </a>
             <ul class="dropdown-menu border-0  primary-font-size position-absolute" aria-labelledby="offcanvasNavbarDropdown">
-              <%= render partial: 'shared/dropdown_items', collection: @genders, as: :item %>
+              <% @genders.each do |gender| %>
+                <%= render 'shared/dropdown_items', value: gender, model_name: 'gender'  %>
+              <% end %>
             </ul>
           </li>
         </ul>
@@ -80,7 +84,9 @@
                 Shop by Brand
               </a>
               <ul class="dropdown-menu border-0 primary-font-size" aria-labelledby="offcanvasNavbarDropdown">
-                <%= render partial: 'shared/dropdown_items', collection: @brands, as: :item %>
+                <% @brands.each do |brand| %>
+                <%= render 'shared/dropdown_items', value: brand, model_name: 'brand'  %>
+              <% end %>
               </ul>
             </li>
             <li class="nav-item dropdown border-bottom pb-md-4">
@@ -88,7 +94,9 @@
                 Shop by Gender
               </a>
               <ul class="dropdown-menu border-0  primary-font-size" aria-labelledby="offcanvasNavbarDropdown">
-                <%= render partial: 'shared/dropdown_items', collection: @genders, as: :item %>
+              <% @genders.each do |gender| %>
+                <%= render 'shared/dropdown_items', value: gender, model_name: 'brand'  %>
+              <% end %>
               </ul>
             </li>
             <li class="nav-item border-bottom pb-md-4">
