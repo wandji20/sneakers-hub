@@ -28,8 +28,9 @@ class ApplicationController < ActionController::Base
   end
 
   def set_brands_and_genders
-    @brands = Brand.pluck(:name)
-    @genders = Gender.pluck(:name)
+    # @brands = Brand.pluck(:name)
+    @brands = Brand.select(:name)
+    @genders = Gender.select(:name)
   end
 
   def set_previous_url(url)

@@ -16,10 +16,8 @@
               Brand
             </a>
             <ul class="dropdown-menu border-0 primary-font-size position-absolute" aria-labelledby="offcanvasNavbarDropdown">
-              <turbo-frame target="<%= turbo_stream_target%>">
-                <% @brands.each do |brand| %>
-                  <%= render 'shared/dropdown_items', value: brand, model_name: 'brand'  %>
-                <% end %>
+              <turbo-frame id="brands" target="<%= turbo_stream_target%>" src="/brands" loading="lazy">
+                <span>Loading...</span>
               </turbo-frame>
             </ul>
           </li>
@@ -28,10 +26,8 @@
               Gender
             </a>
             <ul class="dropdown-menu border-0  primary-font-size position-absolute" aria-labelledby="offcanvasNavbarDropdown">
-              <turbo-frame target="<%= turbo_stream_target%>">
-                <% @genders.each do |gender| %>
-                  <%= render 'shared/dropdown_items', value: gender, model_name: 'gender'  %>
-                <% end %>
+              <turbo-frame id="genders" target="<%= turbo_stream_target%>" src="/genders" loading="lazy">
+                <span>Loading</span>
               </turbo-frame>
             </ul>
           </li>
@@ -40,7 +36,7 @@
       </div>
       <div class="col-5 col-lg-4 text-center">
         <%= link_to root_path do %>
-          <%= image_tag("sneaker-logo.png", class: "img-fluid", class: 'logo', alt: 'sneaker logo' ) %>
+          <%= image_tag("sneaker-logo.png", class: "img-fluid logo", alt: 'sneaker logo' ) %>
         <% end %>
       </div>
       <div class="col-lg-4">
@@ -92,7 +88,7 @@
               </a>
               <ul class="dropdown-menu border-0 primary-font-size" aria-labelledby="offcanvasNavbarDropdown">
                 <% @brands.each do |brand| %>
-                  <%= render 'shared/dropdown_items', value: brand, model_name: 'brand'  %>
+                  <%= render 'shared/dropdown_items', value: brand.name, model_name: 'brand'  %>
                 <% end %>
               </ul>
             </li>
@@ -102,7 +98,7 @@
               </a>
               <ul class="dropdown-menu border-0  primary-font-size" aria-labelledby="offcanvasNavbarDropdown">
                 <% @genders.each do |gender| %>
-                  <%= render 'shared/dropdown_items', value: gender, model_name: 'brand'  %>
+                  <%= render 'shared/dropdown_items', value: gender.name, model_name: 'gender'  %>
                 <% end %>
               </ul>
             </li>

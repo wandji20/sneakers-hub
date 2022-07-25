@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :order_items, except: [:new ]
   resources :sneakers, only: [:index, :show]
   resources :sessions, only: [:create]
+  resources :brands, only: :index
+  resources :genders, only: :index
   root to: 'pages#home'
   get 'about', to: "pages#about"
   post 'checkout', to: "pages#checkout"
