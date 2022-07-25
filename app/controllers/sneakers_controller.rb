@@ -6,6 +6,15 @@ class SneakersController < ApplicationController
   def index
     @pagy, @sneakers = pagy(scoped_records)
     @sneakers.includes(:brand, :gender)
+
+    respond_to do |format|
+      format.html {}
+      format.json do
+        render json: {
+          entries: render_to_string(partial: @sneakers, formats: [:html]), pagination: view_context.pagy_nav(@pagy)
+        }
+      end
+    end
   end
 
   def show
