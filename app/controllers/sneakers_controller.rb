@@ -33,6 +33,6 @@ class SneakersController < ApplicationController
       release_date: 'Release Date'
     }
 
-    @sort_option = sort_options[params['sort-by']&.to_sym] || 'All'
+    @sort_option ||= sort_options[params['sort-by']&.to_sym] || 'All'
   end
 end

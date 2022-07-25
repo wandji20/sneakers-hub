@@ -12,6 +12,7 @@ import "@hotwired/turbo-rails"
 import "bootstrap"
 import "../stylesheets/application.scss"
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import "controllers"
 
 Rails.start()
 // Turbolinks.start()
