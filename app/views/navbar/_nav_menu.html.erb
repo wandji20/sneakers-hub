@@ -5,18 +5,22 @@
         <span class="navbar-toggler-icon primary-font-size"></span>
       </button>
       <div class="d-none d-lg-block col-lg-4">
-       <ul class="navbar-nav justify-content-start flex-row flex-grow-1 pe-3">
+        <ul class="navbar-nav justify-content-start flex-row flex-grow-1 pe-3">
           <li class="nav-item me-4">
-            <%= link_to "Shop All", sneakers_path, class: "nav-link" %>
+            <turbo-frame target="sneakers">
+              <%= link_to "Shop All", sneakers_path, class: "nav-link", "data-turbo-action": "advance"%>
+            </turbo-frame>
           </li>
           <li class="nav-item me-4 dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Brand
             </a>
             <ul class="dropdown-menu border-0 primary-font-size position-absolute" aria-labelledby="offcanvasNavbarDropdown">
-              <% @brands.each do |brand| %>
-                <%= render 'shared/dropdown_items', value: brand, model_name: 'brand'  %>
-              <% end %>
+              <turbo-frame target="sneakers">
+                <% @brands.each do |brand| %>
+                  <%= render 'shared/dropdown_items', value: brand, model_name: 'brand'  %>
+                <% end %>
+              </turbo-frame>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -24,12 +28,15 @@
               Gender
             </a>
             <ul class="dropdown-menu border-0  primary-font-size position-absolute" aria-labelledby="offcanvasNavbarDropdown">
-              <% @genders.each do |gender| %>
-                <%= render 'shared/dropdown_items', value: gender, model_name: 'gender'  %>
-              <% end %>
+              <turbo-frame target="sneakers">
+                <% @genders.each do |gender| %>
+                  <%= render 'shared/dropdown_items', value: gender, model_name: 'gender'  %>
+                <% end %>
+              </turbo-frame>
             </ul>
           </li>
         </ul>
+      
       </div>
       <div class="col-5 col-lg-4 text-center">
         <%= link_to root_path do %>
@@ -84,9 +91,11 @@
                 Shop by Brand
               </a>
               <ul class="dropdown-menu border-0 primary-font-size" aria-labelledby="offcanvasNavbarDropdown">
-                <% @brands.each do |brand| %>
-                <%= render 'shared/dropdown_items', value: brand, model_name: 'brand'  %>
-              <% end %>
+                <turbo-frame target="sneakers">
+                  <% @brands.each do |brand| %>
+                    <%= render 'shared/dropdown_items', value: brand, model_name: 'brand'  %>
+                  <% end %>
+                </turbo-frame>
               </ul>
             </li>
             <li class="nav-item dropdown border-bottom pb-md-4">
@@ -94,9 +103,11 @@
                 Shop by Gender
               </a>
               <ul class="dropdown-menu border-0  primary-font-size" aria-labelledby="offcanvasNavbarDropdown">
-              <% @genders.each do |gender| %>
-                <%= render 'shared/dropdown_items', value: gender, model_name: 'brand'  %>
-              <% end %>
+                <turbo-frame target="sneakers">
+                  <% @genders.each do |gender| %>
+                    <%= render 'shared/dropdown_items', value: gender, model_name: 'brand'  %>
+                  <% end %>
+                </turbo-frame>
               </ul>
             </li>
             <li class="nav-item border-bottom pb-md-4">
