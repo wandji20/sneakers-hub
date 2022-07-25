@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_shopping_cart
-    @shopping_cart = if logged_in?
+    @shopping_cart ||= if logged_in?
                        current_user.shopping_cart
                      elsif session[:shopping_cart_id]
                        ShoppingCart.find(session[:shopping_cart_id])
@@ -22,12 +22,21 @@ class ApplicationController < ActionController::Base
   end
 
   def load_cart_items
-    @shopping_cart_items = @shopping_cart.order_items.includes(:sneaker)
+    p session.to_h
+    @shopping_cart_items ||= @shopping_cart.order_items.includes(:sneaker)
     @shopping_cart_items_count = @shopping_cart_items.count
   end
 
   def set_brands_and_genders
     @brands = Brand.pluck(:name)
     @genders = Gender.pluck(:name)
+  end
+
+  def set_previous_url(url)
+    session[:previous_url] = url
+  end
+
+  def reset_previous_url
+    session.delete('previous_url') if session[:previous_url]
   end
 end

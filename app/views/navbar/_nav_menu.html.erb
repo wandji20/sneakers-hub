@@ -8,7 +8,7 @@
         <ul class="navbar-nav justify-content-start flex-row flex-grow-1 pe-3">
           <turbo-frame target="<%= turbo_stream_target%>">
             <li class="nav-item me-4">
-              <%= link_to "Shop All", sneakers_path, class: "nav-link"%>
+              <%= link_to "Shop All", sneakers_path, class: "nav-link", "data-turbo-action": "advance"%>
             </li>
           </turbo-frame>
           <li class="nav-item me-4 dropdown">
