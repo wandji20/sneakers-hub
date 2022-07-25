@@ -44,9 +44,9 @@
           <div class="d-inline-block position-relative d-lg-none">
             <i class="fs-3 fw-bolder bi bi-cart"></i>
             <span class="w-100 cart-badge text-center bg-warning rounded-circle position-absolute   <%= @shopping_cart_items_count == 0 ? 'd-none' : '' %> ">
-              <%= turbo_frame_tag 'cart-badge' do %>
-                <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
-              <% end %>
+            <turbo-frame id='cart-badge' data-turbo-permanent>
+              <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
+            </turbo-frame>
             </span>
           </div>
         <% end %>
@@ -58,9 +58,11 @@
           <li class="nav-item me-3">
             <%= link_to order_items_path, class: "nav-link" do %>
               Cart
-              (<%= turbo_frame_tag 'cart-count' do %>
-                <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart.order_items.count } %>
-              <% end %>)
+              (
+                <turbo-frame id='cart-count' data-turbo-permanent>
+                  <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
+                </turbo-frame>
+              )
             <% end %>
           </li>
           <% if logged_in? %>
