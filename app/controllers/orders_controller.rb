@@ -3,19 +3,18 @@ class OrdersController < ApplicationController
   before_action :initialize_order, only: :create
 
   def create
-    begin 
-      @new_order.save!
-      # create payment_intent
-      payment_intent = StripePayment.create_payment_intent(@new_order.payment_attributes)
-      @new_order.update(
-        payment_intent_id: payment_intent.id, payment_intent_client_id: payment_intent.client_secret
-      )
-      handle_update_cart_items(@shopping_cart, params[:sneaker_id])
-      redirect_to order_url(@new_order)
-    rescue => exception
-      redirect_back(fallback_location: root_path)
-      flash[:alert] = 'Something went wrong' 
-    end
+    @new_order.save!
+    # create payment_intent
+    payment_intent = StripePayment.create_payment_intent(@new_order.payment_attributes)
+    @new_order.update(
+      payment_intent_id: payment_intent.id, payment_intent_client_id: payment_intent.client_secret
+    )
+    handle_update_cart_items(@shopping_cart, params[:sneaker_id])
+    redirect_to order_url(@new_order)
+  rescue StandardError => e
+    p e
+    redirect_back(fallback_location: root_path)
+    flash[:alert] = 'Something went wrong'
   end
 
   def show
@@ -33,14 +32,13 @@ class OrdersController < ApplicationController
 
   def initialize_order
     @new_order = if params[:sneaker_id] && logged_in?
-        current_user.orders.build(order_items_attributes: [{ sneaker_id: params[:sneaker_id] }])
-      elsif params[:sneaker_id]
-        Order.new(order_items_attributes: [{ sneaker_id: params[:sneaker_id] }])
-      else
-        Order.new(order_items_attributes: shopping_cart_items(@shopping_cart))
-      end
+                   current_user.orders.build(order_items_attributes: [{ sneaker_id: params[:sneaker_id] }])
+                 elsif params[:sneaker_id]
+                   Order.new(order_items_attributes: [{ sneaker_id: params[:sneaker_id] }])
+                 else
+                   Order.new(order_items_attributes: shopping_cart_items(@shopping_cart))
+                 end
   end
-
 
   def set_stripe_event
     endpoint_secret = ENV['STRIPE_ENDPOINT_SECRET'] || Rails.application.credentials.dig(:stripe, :test_endpoint_secret)
@@ -49,35 +47,35 @@ class OrdersController < ApplicationController
     event = nil
 
     begin
-        event = Stripe::Webhook.construct_event(
-            payload, sig_header, endpoint_secret
-        )
+      event = Stripe::Webhook.construct_event(
+        payload, sig_header, endpoint_secret
+      )
     rescue JSON::ParserError => e
-        # Invalid payload
-        status 400
-        return
+      p e
+      # Invalid payload
+      status 400
+      return
     rescue Stripe::SignatureVerificationError => e
-        # Invalid signature
-        status 400
-        return
+      p e
+      # Invalid signature
+      status 400
+      return
     end
     event
   end
 
   def handle_update_cart_items(shopping_cart, sneaker_id)
-    begin
-      if shopping_cart.present? && sneaker_id.present?
-        # filter sneaker_id from shopping cart
-        item = shopping_cart.order_items.find_by(sneaker_id: sneaker_id)
-        shopping_cart.update(
-          order_items: shopping_cart.order_items.where.not(sneaker_id: sneaker_id)
-        )
-      elsif(shopping_cart.present?)
-        # clear shopping cart
-        shopping_cart.order_items.destroy_all
-      end
-    rescue => exception
-      p exception
+    if shopping_cart.present? && sneaker_id.present?
+      # filter sneaker_id from shopping cart
+      item = shopping_cart.order_items.find_by(sneaker_id: sneaker_id)
+      shopping_cart.update(
+        order_items: shopping_cart.order_items.where.not(sneaker_id: item.sneaker_id)
+      )
+    elsif shopping_cart.present?
+      # clear shopping cart
+      shopping_cart.order_items.destroy_all
     end
+  rescue StandardError => e
+    p e
   end
 end

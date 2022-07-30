@@ -1,6 +1,6 @@
 class SneakersController < ApplicationController
   before_action :set_sneaker, only: :show
-  before_action :set_sort_option
+  before_action :sort_option
   before_action :save_url
 
   def index
@@ -8,7 +8,7 @@ class SneakersController < ApplicationController
     @sneakers.includes(:brand, :gender)
 
     respond_to do |format|
-      format.html {}
+      format.html
       format.json do
         render json: {
           entries: render_to_string(partial: @sneakers, formats: [:html]), pagination: view_context.pagy_nav(@pagy)
@@ -35,7 +35,7 @@ class SneakersController < ApplicationController
     records
   end
 
-  def set_sort_option
+  def sort_option
     sort_options = {
       increasing_price: 'Increasing Price',
       decreasing_price: 'Decreasing Price',

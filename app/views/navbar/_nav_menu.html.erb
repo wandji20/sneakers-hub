@@ -47,7 +47,7 @@
         <div class="d-inline-block position-relative d-lg-none">
           <i class="fs-3 fw-bolder bi bi-cart"></i>
           <turbo-frame id='cart-badge'>
-            <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
+            <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items.count } %>
           </turbo-frame>
         </div>
       <% end %>
@@ -58,7 +58,7 @@
             Cart
             (
               <turbo-frame id='cart-count'>
-                <%= render partial: 'shared/cart_count', locals: { count: @shopping_cart_items_count } %>
+                <%= render partial: 'shared/cart_count', locals: { count: @shopping_cart_items.count } %>
               </turbo-frame>
             )
           <% end %>

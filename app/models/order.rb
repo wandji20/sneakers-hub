@@ -10,13 +10,13 @@ class Order < ApplicationRecord
   end
 
   def payment_attributes
-    amount = (total*100).to_i
+    amount = (total * 100).to_i
     {
       amount: amount,
       currency: 'eur',
       payment_method_types: ['card'],
       metadata: {
-        order_id: id,
+        order_id: id
       }
     }
   end

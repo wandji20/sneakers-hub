@@ -48,17 +48,17 @@ module SessionsHelper
 
   def transfer_shopping_cart(user)
     session_cart = ShoppingCart.find_by_id(session[:shopping_cart_id])
-    if session_cart.present?
-      # Combine session cart with user cart
-      combined_cart_items = (session_cart.order_items.or(user.shopping_cart.order_items)).select('DISTINCT ON (order_items.sneaker_id) *')
+    return unless session_cart.present?
 
-      user.shopping_cart.order_items = combined_cart_items
-      user.shopping_cart.save
-      session.delete(:shopping_cart_id)
-      session_cart.destroy
-    elsif
-      user.shopping_cart
-    end
+    # Combine session cart with user cart
+    combined_cart_items = (session_cart.order_items.or(user.shopping_cart.order_items)).select(
+      'DISTINCT ON (order_items.sneaker_id) *'
+    )
+
+    user.shopping_cart.order_items = combined_cart_items
+    user.shopping_cart.save
+    session.delete(:shopping_cart_id)
+    session_cart.destroy
   end
 
   def shopping_cart_items(shopping_cart)

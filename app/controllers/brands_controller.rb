@@ -1,4 +1,3 @@
 class BrandsController < ApplicationController
-  def index
-  end
+  def index; end
 end

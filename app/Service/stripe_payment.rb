@@ -1,25 +1,24 @@
 class StripePayment
   class << self
     def create_payment_intent(attrs)
-      intent = begin
-        Stripe::PaymentIntent.create(attrs)
-      rescue => exception
-        p exception
-        nil
-      end
-      intent
+      Stripe::PaymentIntent.create(attrs)
+    rescue StandardError => e
+      p e
+      nil
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity
     def handle_webhook_response(event)
       return unless event.present?
+
       case event.type
       when 'payment_intent.payment_failed'
         payment_intent = event.data.object
         begin
           order = Order.find(payment_intent.metadata&.order_id&.to_i)
           order.incomplete!
-        rescue => exception
-          p exception
+        rescue StandardError => e
+          p e
         end
       when 'payment_intent.succeeded'
         payment_intent = event.data.object
@@ -28,19 +27,13 @@ class StripePayment
           order.complete!
           # email user
           # broadcast update to empty shopping cart
-        rescue => exception
-          p exception
-        end
-      when 'payment_intent.created'
-        payment_intent = event.data.object
-        begin
-          order = Order.find(payment_intent.metadata&.order_id&.to_i)
-        rescue => exception
-          
+        rescue StandardError => e
+          p e
         end
       else
-          puts "Unhandled event type: #{event.type}"
+        puts "Unhandled event type: #{event.type}"
       end
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end

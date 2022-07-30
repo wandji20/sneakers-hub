@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
 
   def destroy
     if logged_in?
-      logout 
+      logout
       flash[:notice] = 'You have successfully logout'
     end
     redirect_to redirect_location
