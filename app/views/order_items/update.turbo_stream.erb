@@ -1,9 +1,3 @@
-<%= turbo_stream.update('notice') do %>
-  <%= render partial: 'shared/notice' %>
-<% end %>
-<%= turbo_stream.update('alert') do %>
-  <%= render partial: 'shared/alert' %>
-<% end %>
 <%= turbo_stream.update(@order_item) do %>
   <%= render partial: 'order_item', locals: { order_item: @order_item } %>
 <% end %>

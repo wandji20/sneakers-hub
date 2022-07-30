@@ -72,7 +72,7 @@ class OrdersController < ApplicationController
         shopping_cart.update(
           order_items: shopping_cart.order_items.where.not(sneaker_id: sneaker_id)
         )
-      elsif(shopping_cart.present)
+      elsif(shopping_cart.present?)
         # clear shopping cart
         shopping_cart.order_items.destroy_all
       end

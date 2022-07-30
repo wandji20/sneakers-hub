@@ -63,6 +63,9 @@ p {
 }
 
 @media (min-width: 768px) {
+  .order-items {
+    margin-bottom: 0;
+  }
   .primary-font-size {
     font-size: calc(0.8rem + 0.6vw);
   }
@@ -79,26 +82,12 @@ p {
     font-size: calc(1.1rem + 0.6vw) !important;
   }
 
-  // .order_item {
-  //   width: 75%;
-  // }
-
-  .accordion-button::after {
-    width: 2.25rem;
-    height: 2.25rem;
-    background-size: 2.25rem;
-  }
-
   .sneaker-background {
     height: 320px;
   }
 }
 
 @media (min-width: 992px) {
-
-  .order-summary {
-    height: 15vh;
-  }
 
   .sneaker-image {
     height: 500px;
