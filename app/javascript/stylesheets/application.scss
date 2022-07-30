@@ -27,10 +27,6 @@
   bottom: -12px;
 }
 
-.announcement {
-  margin-top: 64px;
-}
-
 .pagination {
   justify-content: center;
 }
@@ -71,10 +67,6 @@ p {
     font-size: calc(0.8rem + 0.6vw);
   }
 
-  .announcement {
-    margin-top: 77px;
-  }
-
   .logo {
     height: 60px;
   }
@@ -108,19 +100,9 @@ p {
 }
 
 @media (min-width: 992px) {
-  .logo {
-    height: 80px;
-  }
 
   .order-summary {
     height: 15vh;
-  }
-  // .order_item {
-  //   width: 50%;
-  // }
-
-  .announcement {
-    margin-top: 97px;
   }
 
   .sneaker-image {

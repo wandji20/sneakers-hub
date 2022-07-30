@@ -1,137 +1,129 @@
-<header class="secondary-bg header fixed-top">
-  <nav id="nav" class="navbar navbar-light secondary-bg">
-    <div class="container-fluid col-lg-12 ">
-      <button class="navbar-toggler fw-bolder d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-        <span class="navbar-toggler-icon primary-font-size"></span>
-      </button>
-      <div class="d-none d-lg-block col-lg-4">
-        <ul class="navbar-nav justify-content-start flex-row flex-grow-1 pe-3">
-          <turbo-frame target="<%= turbo_stream_target%>">
-            <li class="nav-item me-4">
-              <%= link_to "Shop All", sneakers_path, class: "nav-link", "data-turbo-action": "advance"%>
-            </li>
-          </turbo-frame>
-          <li class="nav-item me-4 dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Brand
-            </a>
-            <ul class="dropdown-menu border-0 primary-font-size position-absolute" aria-labelledby="offcanvasNavbarDropdown">
-              <turbo-frame id="brands" target="<%= turbo_stream_target%>" src="/brands" loading="lazy">
-                <span>Loading...</span>
-              </turbo-frame>
-            </ul>
+<%= render 'shared/announcement' %>
+<nav id="nav" class="navbar navbar-light secondary-bg sticky-top">
+  <div class="container-fluid col-lg-12 ">
+    <button class="navbar-toggler fw-bolder d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon primary-font-size"></span>
+    </button>
+    <div class="col-5 col-lg-3 text-center">
+      <%= link_to root_path do %>
+        <%= image_tag("sneaker-logo.png", class: "img-fluid logo", alt: 'sneaker logo' ) %>
+      <% end %>
+    </div>
+    <div class="d-none d-lg-block col-lg-6">
+      <ul class="navbar-nav justify-content-between flex-row flex-grow-1 pe-3">
+        <turbo-frame target="<%= turbo_stream_target%>">
+          <li class="nav-item me-4">
+            <%= link_to "Shop All", sneakers_path, class: "nav-link", "data-turbo-action": "advance"%>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Gender
-            </a>
-            <ul class="dropdown-menu border-0  primary-font-size position-absolute" aria-labelledby="offcanvasNavbarDropdown">
-              <turbo-frame id="genders" target="<%= turbo_stream_target%>" src="/genders" loading="lazy">
-                <span>Loading</span>
-              </turbo-frame>
-            </ul>
-          </li>
-        </ul>
-      
-      </div>
-      <div class="col-5 col-lg-4 text-center">
-        <%= link_to root_path do %>
-          <%= image_tag("sneaker-logo.png", class: "img-fluid logo", alt: 'sneaker logo' ) %>
-        <% end %>
-      </div>
-      <div class="col-lg-4">
-        <%= link_to order_items_path, class: "text-dark text-decoration-none d-lg-none" do %>
-          <div class="d-inline-block position-relative d-lg-none">
-            <i class="fs-3 fw-bolder bi bi-cart"></i>
-            <span class="w-100 cart-badge text-center bg-warning rounded-circle position-absolute   <%= @shopping_cart_items_count == 0 ? 'd-none' : '' %> ">
-            <turbo-frame id='cart-badge'>
-              <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
+        </turbo-frame>
+        <li class="nav-item me-4 dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Brand
+          </a>
+          <ul class="dropdown-menu border-0 primary-font-size position-absolute" aria-labelledby="offcanvasNavbarDropdown">
+            <turbo-frame id="brands" target="<%= turbo_stream_target%>" src="/brands" loading="lazy">
+              <span>Loading...</span>
             </turbo-frame>
-            </span>
-          </div>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Gender
+          </a>
+          <ul class="dropdown-menu border-0  primary-font-size position-absolute" aria-labelledby="offcanvasNavbarDropdown">
+            <turbo-frame id="genders" target="<%= turbo_stream_target%>" src="/genders" loading="lazy">
+              <span>Loading</span>
+            </turbo-frame>
+          </ul>
+        </li>
+        <li class="nav-item me-3">
+          <%= link_to "Contact", '#', class: "nav-link" %>
+        </li>
+      </ul>
+    
+    </div>
+    <div class="col-lg-3">
+      <%= link_to order_items_path, class: "text-dark text-decoration-none d-lg-none" do %>
+        <div class="d-inline-block position-relative d-lg-none">
+          <i class="fs-3 fw-bolder bi bi-cart"></i>
+          <span class="w-100 cart-badge text-center bg-warning rounded-circle position-absolute   <%= @shopping_cart_items_count == 0 ? 'd-none' : '' %> ">
+          <turbo-frame id='cart-badge'>
+            <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
+          </turbo-frame>
+          </span>
+        </div>
+      <% end %>
+      <span class="d-inline-block d-lg-none"><i class="fs-3 fw-bolder bi bi-search"></i></span>
+      <ul class="navbar-nav justify-content-end flex-row flex-grow-1 pe-3 d-none d-lg-flex">
+        <li class="nav-item me-3">
+          <%= link_to order_items_path, class: "nav-link" do %>
+            Cart
+            (
+              <turbo-frame id='cart-count'>
+                <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
+              </turbo-frame>
+            )
+          <% end %>
+        </li>
+        <% if logged_in? %>
+          <li class="nav-item">
+            <%= link_to "log out", logout_path, method: :delete, class: "nav-link" %>
+          </li>
+        <% else %>  
+          <li class="nav-item">
+            <%= link_to "log in", login_path, class: "nav-link" %>
+          </li>
         <% end %>
-        <span class="d-inline-block d-lg-none"><i class="fs-3 fw-bolder bi bi-search"></i></span>
-        <ul class="navbar-nav justify-content-end flex-row flex-grow-1 pe-3 d-none d-lg-flex">
-          <li class="nav-item me-3">
+      </ul>
+    <div class="offcanvas offcanvas-start w-75 d-lg-none" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item border-bottom pb-md-4">
+            <%= link_to "shop all", sneakers_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item dropdown border-bottom pb-md-4">
+            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Shop by Brand
+            </a>
+            <ul class="dropdown-menu border-0 primary-font-size" aria-labelledby="offcanvasNavbarDropdown">
+              <% @brands.each do |brand| %>
+                <%= render 'shared/dropdown_items', value: brand.name, model_name: 'brand'  %>
+              <% end %>
+            </ul>
+          </li>
+          <li class="nav-item dropdown border-bottom pb-md-4">
+            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Shop by Gender
+            </a>
+            <ul class="dropdown-menu border-0  primary-font-size" aria-labelledby="offcanvasNavbarDropdown">
+              <% @genders.each do |gender| %>
+                <%= render 'shared/dropdown_items', value: gender.name, model_name: 'gender'  %>
+              <% end %>
+            </ul>
+          </li>
+          <li class="nav-item border-bottom pb-md-4">
             <%= link_to "Contact", '#', class: "nav-link" %>
           </li>
-          <li class="nav-item me-3">
-            <%= link_to order_items_path, class: "nav-link" do %>
-              Cart
-              (
-                <turbo-frame id='cart-count'>
-                  <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
-                </turbo-frame>
-              )
-            <% end %>
-          </li>
           <% if logged_in? %>
-            <li class="nav-item">
+            <li class="nav-item pb-md-4">
               <%= link_to "log out", logout_path, method: :delete, class: "nav-link" %>
             </li>
           <% else %>  
-            <li class="nav-item">
+            <li class="nav-item pb-md-4">
               <%= link_to "log in", login_path, class: "nav-link" %>
             </li>
           <% end %>
         </ul>
-      <div class="offcanvas offcanvas-start w-75 d-lg-none" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
-          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item border-bottom pb-md-4">
-              <%= link_to "shop all", sneakers_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item dropdown border-bottom pb-md-4">
-              <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Shop by Brand
-              </a>
-              <ul class="dropdown-menu border-0 primary-font-size" aria-labelledby="offcanvasNavbarDropdown">
-                <% @brands.each do |brand| %>
-                  <%#= render 'shared/dropdown_items', value: brand.name, model_name: 'brand'  %>
-                <% end %>
-              </ul>
-            </li>
-            <li class="nav-item dropdown border-bottom pb-md-4">
-              <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Shop by Gender
-              </a>
-              <ul class="dropdown-menu border-0  primary-font-size" aria-labelledby="offcanvasNavbarDropdown">
-                <% @genders.each do |gender| %>
-                  <%#= render 'shared/dropdown_items', value: gender.name, model_name: 'gender'  %>
-                <% end %>
-              </ul>
-            </li>
-            <li class="nav-item border-bottom pb-md-4">
-              <%= link_to "Contact", '#', class: "nav-link" %>
-            </li>
-            <% if logged_in? %>
-              <li class="nav-item pb-md-4">
-                <%= link_to "log out", logout_path, method: :delete, class: "nav-link" %>
-              </li>
-            <% else %>  
-              <li class="nav-item pb-md-4">
-                <%= link_to "log in", login_path, class: "nav-link" %>
-              </li>
-            <% end %>
-          </ul>
-          <form class="position-relative mt-2 pb-md-4">
-            <input class="form-control me-2 position-absolute  primary-font-size" type="search" placeholder="Search" >
-            <button class="btn position-absolute end-0  primary-font-size" type="submit">
-              <i class="bi bi-search"></i>
-            </button>
-          </form>
-        </div>
       </div>
     </div>
-  </nav>
-    <%= turbo_frame_tag 'alert' do %>
-      <%= render partial: 'shared/alert' %>
-    <% end %>
-    <%= turbo_frame_tag 'notice' do %>
-      <%= render partial: 'shared/notice' %>
-    <% end %>
-</header>
-<%= render 'shared/announcement' %>
+  </div>
+</nav>
+  <%= turbo_frame_tag 'alert' do %>
+    <%= render partial: 'shared/alert' %>
+  <% end %>
+  <%= turbo_frame_tag 'notice' do %>
+    <%= render partial: 'shared/notice' %>
+  <% end %>
