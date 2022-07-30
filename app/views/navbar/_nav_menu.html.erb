@@ -43,24 +43,22 @@
     
     </div>
     <div class="col-lg-3">
-      <%= link_to order_items_path, class: "text-dark text-decoration-none d-lg-none" do %>
+      <%= link_to order_items_path, class: "text-dark text-decoration-none d-sm-none" do %>
         <div class="d-inline-block position-relative d-lg-none">
           <i class="fs-3 fw-bolder bi bi-cart"></i>
-          <span class="w-100 cart-badge text-center bg-warning rounded-circle position-absolute   <%= @shopping_cart_items_count == 0 ? 'd-none' : '' %> ">
           <turbo-frame id='cart-badge'>
             <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
           </turbo-frame>
-          </span>
         </div>
       <% end %>
-      <span class="d-inline-block d-lg-none"><i class="fs-3 fw-bolder bi bi-search"></i></span>
+      <span class="d-inline-block d-lg-none"><i class="fs-3 fw-bolder bi bi-bell"></i></span>
       <ul class="navbar-nav justify-content-end flex-row flex-grow-1 pe-3 d-none d-lg-flex">
         <li class="nav-item me-3">
           <%= link_to order_items_path, class: "nav-link" do %>
             Cart
             (
               <turbo-frame id='cart-count'>
-                <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
+                <%= render partial: 'shared/cart_count', locals: { count: @shopping_cart_items_count } %>
               </turbo-frame>
             )
           <% end %>

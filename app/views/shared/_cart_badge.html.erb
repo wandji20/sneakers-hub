@@ -1,1 +1,5 @@
-<span><%= count %></span>
+<span 
+  class="w-100 cart-badge text-center bg-warning rounded-circle position-absolute <%= count == 0 ? 'd-none' : '' %> "
+>
+  <span><%= count %></span>
+</span>
