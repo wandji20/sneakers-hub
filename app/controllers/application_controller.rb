@@ -13,18 +13,17 @@ class ApplicationController < ActionController::Base
 
   def load_shopping_cart
     @shopping_cart ||= if logged_in?
-                       current_user.shopping_cart
-                     elsif session[:shopping_cart_id]
-                       ShoppingCart.find(session[:shopping_cart_id])
-                     else
-                       ShoppingCart.new
-                     end
+        ShoppingCart.find_or_create_by(user_id: current_user.id)
+      elsif session[:shopping_cart_id]
+        ShoppingCart.find(session[:shopping_cart_id])
+      else
+        ShoppingCart.new
+      end
   end
 
   def load_cart_items
-    p session.to_h
     @shopping_cart_items ||= @shopping_cart.order_items.includes(:sneaker)
-    @shopping_cart_items_count = @shopping_cart_items.count
+    @shopping_cart_items_count ||= @shopping_cart_items.count
   end
 
   def set_brands_and_genders

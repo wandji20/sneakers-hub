@@ -44,7 +44,7 @@
           <div class="d-inline-block position-relative d-lg-none">
             <i class="fs-3 fw-bolder bi bi-cart"></i>
             <span class="w-100 cart-badge text-center bg-warning rounded-circle position-absolute   <%= @shopping_cart_items_count == 0 ? 'd-none' : '' %> ">
-            <turbo-frame id='cart-badge' data-turbo-permanent>
+            <turbo-frame id='cart-badge'>
               <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
             </turbo-frame>
             </span>
@@ -59,7 +59,7 @@
             <%= link_to order_items_path, class: "nav-link" do %>
               Cart
               (
-                <turbo-frame id='cart-count' data-turbo-permanent>
+                <turbo-frame id='cart-count'>
                   <%= render partial: 'shared/cart_badge', locals: { count: @shopping_cart_items_count } %>
                 </turbo-frame>
               )
@@ -67,7 +67,7 @@
           </li>
           <% if logged_in? %>
             <li class="nav-item">
-              <%= link_to "log out", logout_path, class: "nav-link" %>
+              <%= link_to "log out", logout_path, method: :delete, class: "nav-link" %>
             </li>
           <% else %>  
             <li class="nav-item">
@@ -90,7 +90,7 @@
               </a>
               <ul class="dropdown-menu border-0 primary-font-size" aria-labelledby="offcanvasNavbarDropdown">
                 <% @brands.each do |brand| %>
-                  <%= render 'shared/dropdown_items', value: brand.name, model_name: 'brand'  %>
+                  <%#= render 'shared/dropdown_items', value: brand.name, model_name: 'brand'  %>
                 <% end %>
               </ul>
             </li>
@@ -100,7 +100,7 @@
               </a>
               <ul class="dropdown-menu border-0  primary-font-size" aria-labelledby="offcanvasNavbarDropdown">
                 <% @genders.each do |gender| %>
-                  <%= render 'shared/dropdown_items', value: gender.name, model_name: 'gender'  %>
+                  <%#= render 'shared/dropdown_items', value: gender.name, model_name: 'gender'  %>
                 <% end %>
               </ul>
             </li>
@@ -109,7 +109,7 @@
             </li>
             <% if logged_in? %>
               <li class="nav-item pb-md-4">
-                <%= link_to "log out", logout_path, class: "nav-link" %>
+                <%= link_to "log out", logout_path, method: :delete, class: "nav-link" %>
               </li>
             <% else %>  
               <li class="nav-item pb-md-4">

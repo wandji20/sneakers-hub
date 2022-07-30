@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   get 'sign_up', to: 'users#new'
-  get 'logout', to: 'sessions#destroy'
+  delete 'logout', to: 'sessions#destroy'
   resources :users, only: [:create, :update]
   resources :order_items, except: [:new ]
   resources :sneakers, only: [:index, :show]
