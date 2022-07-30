@@ -36,10 +36,11 @@ class OrdersController < ApplicationController
                  elsif params[:sneaker_id]
                    Order.new(order_items_attributes: [{ sneaker_id: params[:sneaker_id] }])
                  else
-                   Order.new(order_items_attributes: shopping_cart_items(@shopping_cart))
+                   Order.new(order_items_attributes: shopping_cart_attributes(@shopping_cart))
                  end
   end
 
+  # rubocop:disable Lint/DuplicateBranch
   def set_stripe_event
     endpoint_secret = ENV['STRIPE_ENDPOINT_SECRET'] || Rails.application.credentials.dig(:stripe, :test_endpoint_secret)
     payload = request.body.read
@@ -63,6 +64,7 @@ class OrdersController < ApplicationController
     end
     event
   end
+  # rubocop:enable Lint/DuplicateBranch
 
   def handle_update_cart_items(shopping_cart, sneaker_id)
     if shopping_cart.present? && sneaker_id.present?
@@ -77,5 +79,11 @@ class OrdersController < ApplicationController
     end
   rescue StandardError => e
     p e
+  end
+
+  def shopping_cart_attributes(shopping_cart)
+    shopping_cart.order_items.pluck(:sneaker_id, :quantity).map do |pair|
+      { sneaker_id: pair[0], quantity: pair[1] }
+    end
   end
 end

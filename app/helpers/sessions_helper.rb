@@ -60,10 +60,4 @@ module SessionsHelper
     session.delete(:shopping_cart_id)
     session_cart.destroy
   end
-
-  def shopping_cart_items(shopping_cart)
-    shopping_cart.order_items.pluck(:sneaker_id, :quantity).map do |pair|
-      { sneaker_id: pair[0], quantity: pair[1] }
-    end
-  end
 end

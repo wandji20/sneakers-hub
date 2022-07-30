@@ -7,7 +7,7 @@ class StripePayment
       nil
     end
 
-    # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     def handle_webhook_response(event)
       return unless event.present?
 
@@ -34,6 +34,6 @@ class StripePayment
         puts "Unhandled event type: #{event.type}"
       end
     end
-    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   end
 end
