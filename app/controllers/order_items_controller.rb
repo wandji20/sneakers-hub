@@ -14,6 +14,7 @@ class OrderItemsController < ApplicationController
       session[:shopping_cart_id] = @shopping_cart.id unless current_user.present?
       flash.now[:notice] = "#{@sneaker.name} has been added to cart"
       respond_to do |format|
+        format.html { redirect_to order_item_path }
         format.turbo_stream
       end
     else
