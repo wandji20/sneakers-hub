@@ -37,7 +37,7 @@
           </ul>
         </li>
         <li class="nav-item me-3">
-          <%= link_to "Contact", '#', class: "nav-link" %>
+          <%= link_to "About", about_path, class: "nav-link" %>
         </li>
       </ul>
     
@@ -101,11 +101,11 @@
             <ul class="dropdown-menu border-0  primary-font-size" aria-labelledby="offcanvasNavbarDropdown">
               <% @genders.each do |gender| %>
                 <%= render 'shared/dropdown_items', value: gender.name, model_name: 'gender'  %>
-              <% end %>
+            <% end %>
             </ul>
           </li>
           <li class="nav-item border-bottom pb-md-4">
-            <%= link_to "Contact", '#', class: "nav-link" %>
+            <%= link_to "About", about_path, class: "nav-link" %>
           </li>
           <% if logged_in? %>
             <li class="nav-item pb-md-4">
