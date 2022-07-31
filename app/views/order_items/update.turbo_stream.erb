@@ -1,6 +1,9 @@
 <%= turbo_stream.update(@order_item) do %>
   <%= render partial: 'order_item', locals: { order_item: @order_item } %>
 <% end %>
-<%= turbo_stream.update('total_price') do %>
+<%= turbo_stream.update('total_price_sm') do %>
+  <%= render partial: 'order_items/total_order_price', locals: { total: @shopping_cart_items.sum(:sub_total) } %>
+<% end %>
+<%= turbo_stream.update('total_price_lg') do %>
   <%= render partial: 'order_items/total_order_price', locals: { total: @shopping_cart_items.sum(:sub_total) } %>
 <% end %>

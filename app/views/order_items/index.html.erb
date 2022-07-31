@@ -7,7 +7,7 @@
         <%= render @shopping_cart_items %>
       </div>
       <div class="container-fluid d-none d-sm-block">
-        <%= turbo_frame_tag 'total_price' do %>
+        <%= turbo_frame_tag 'total_price_sm' do %>
           <%= render partial: 'order_items/total_order_price', locals: { total: @total} %>
         <% end %>
         <div class="col d-flex justify-content-between justify-content-sm-start">
@@ -25,7 +25,7 @@
         
       </div>
       <div class="mt-2 fixed-bottom bg-light container-fluid order-summary pb-3 d-sm-none">
-        <%= turbo_frame_tag 'total_price' do %>
+        <%= turbo_frame_tag 'total_price_lg' do %>
           <%= render partial: 'order_items/total_order_price', locals: { total: @total} %>
         <% end %>
         <div class="col d-flex justify-content-between justify-content-sm-start">
