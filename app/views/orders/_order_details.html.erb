@@ -1,0 +1,6 @@
+<% if order.status == 'complete' || params[:redirect_status] == 'succeeded' %>
+  <%= render 'shared/thank_you_modal' %>
+<% else %>
+  <%= render 'order_summary', order: order %>
+  <%= render 'shared/stripe_ui', order: order %>
+<% end %>

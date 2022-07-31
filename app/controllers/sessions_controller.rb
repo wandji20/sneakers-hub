@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
       login(user)
       remember_user(user)
       transfer_shopping_cart(user)
+      @shopping_cart = user.shopping_cart
       flash[:notice] = 'Welcome'
       redirect_to redirect_location
     else
@@ -16,8 +17,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    logout if logged_in?
-    flash[:notice] = 'You have successfully logout'
+    if logged_in?
+      logout
+      flash[:notice] = 'You have successfully logout'
+    end
     redirect_to redirect_location
   end
 

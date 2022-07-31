@@ -1,12 +1,6 @@
-<div class="container d-flex flex-column bg-light py-2 border mw-100">
-  <div class="accordion-button collapsed p-0 bg-light fs-3 " type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-    <i class= "bi bi-cart me-2"></i>
-    <span>Order Summary</span>
-  </div>
-  <div id="flush-collapseOne" class="accordion-collapse collapse " aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-    <div class="accordion-body">
-      <%= render partial: 'orders/order_item_summary', collection: order.order_items, as: :order_item %>
-    </div>
+<div class="col-sm-12 p-1 col-md-6 d-flex justify-content-center flex-column bg-light py-2 border">
+  <div class="row">
+    <%= render partial: 'orders/order_item_summary', collection: order.order_items, as: :order_item %>
   </div>
 
   <div class="align-self-end">

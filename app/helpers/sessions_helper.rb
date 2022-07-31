@@ -6,7 +6,7 @@ module SessionsHelper
       user = User.find_by(id: cookies.encrypted[:user_id])
       if user&.authenticate(cookies[:remember_token])
         log_in user
-        @current_user = user
+        @current_user ||= user
       end
     end
   end
@@ -47,15 +47,17 @@ module SessionsHelper
   end
 
   def transfer_shopping_cart(user)
-    return if user.shopping_cart
+    session_cart = ShoppingCart.find_by_id(session[:shopping_cart_id])
+    return unless session_cart.present?
 
-    user.shopping_cart = @shopping_cart
+    # Combine session cart with user cart
+    combined_cart_items = (session_cart.order_items.or(user.shopping_cart.order_items)).select(
+      'DISTINCT ON (order_items.sneaker_id) *'
+    )
+
+    user.shopping_cart.order_items = combined_cart_items
+    user.shopping_cart.save
     session.delete(:shopping_cart_id)
-  end
-
-  def shopping_cart_items
-    @shopping_cart.order_items.pluck(:sneaker_id, :quantity).map do |pair|
-      { sneaker_id: pair[0], quantity: pair[1] }
-    end
+    session_cart.destroy
   end
 end

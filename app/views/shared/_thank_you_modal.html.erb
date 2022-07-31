@@ -1,0 +1,13 @@
+<div data-controller="modal" data-modal-target="modal"  class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-white bg-success">
+      <h5 class="modal-title m-auto" id="staticBackdropLabel">Payment Completed</h5>
+      <div class="modal-body">
+        <p>Thank you</p>
+      </div>
+        <%= link_to root_path, class: "btn btn-danger" do %>
+          <span role="button" >Close</span>
+        <% end %>
+    </div>
+  </div>
+</div>

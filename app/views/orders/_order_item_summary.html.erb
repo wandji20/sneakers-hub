@@ -1,11 +1,11 @@
-<div class="row">
+<div class="container col-12  d-flex justify-content-center align-items-center">
   <div class="col-3 p-0 ">
     <%= image_tag(order_item.sneaker.image_url, class: 'img-fluid') %>
   </div>
-  <div class="col-7 fw-light  p-0 ps-4">
+  <div class="col-7 fw-light text-center p-0 ps-4">
     <span class=""><%= order_item.sneaker.name %></span>
   </div>
-  <div class="col-2 p-0 align-self-center text-end">
+  <div class="col-2 p-0 align-self-center text-center">
     <span>$<%= order_item.sub_total %></span>
   </div>
 </div>

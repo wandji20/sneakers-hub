@@ -249,6 +249,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    stripe (6.5.0)
     thor (1.2.1)
     tilt (2.0.10)
     turbo-rails (1.0.1)
@@ -307,6 +308,7 @@ DEPENDENCIES
   shoulda-matchers (~> 5.0)
   sidekiq
   spring
+  stripe
   turbo-rails (~> 1.0)
   tzinfo-data
   web-console (>= 4.1.0)

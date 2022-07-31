@@ -13,7 +13,6 @@ class UsersController < ApplicationController
       flash[:notice] = 'Account Successfully Created'
       redirect_to redirect_location
     else
-      flash[:alert] = 'Something went wrong'
       respond_to do |format|
         format.html { render :new, status: :unprocessable_entity }
       end

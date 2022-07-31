@@ -1,6 +1,9 @@
-<section class="d-flex flex-wrap secondary-bg container-fluid p-1">
-  <%= render @sneakers %>
-</section>
+<turbo-frame id="sneakers">
+  <section class="d-flex flex-wrap secondary-bg container-fluid p-1">
+    <%= render @sneakers %>
+  </section>
+</turbo-frame>
+
 <section class="container-fluid py-3 primary-bg ">
   <%= render  'shared/connect' %>
 </section>

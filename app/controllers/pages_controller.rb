@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_action :set_order, only: :shipping
 
   def home
-    @sneakers = Sneaker.release_date.take(10)
+    @sneakers = Sneaker.release_date.take(12)
   end
 
   def checkout
