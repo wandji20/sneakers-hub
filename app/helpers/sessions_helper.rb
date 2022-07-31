@@ -48,7 +48,7 @@ module SessionsHelper
 
   def transfer_shopping_cart(user)
     session_cart = ShoppingCart.find_by_id(session[:shopping_cart_id])
-    return unless session_cart.present? && user.shopping_cart.present?
+    return unless session_cart.present?
 
     # Combine session cart with user cart
     combined_cart_items = (session_cart.order_items.or(user.shopping_cart.order_items)).select(
