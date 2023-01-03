@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.1'
+ruby '3.1.3'
 
 # Rubocop
 gem 'rubocop', '>= 1.0', '< 2.0'
@@ -30,20 +30,20 @@ gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 # Pagy
 gem 'pagy', '~> 5.6', '>= 5.6.9'
 
-gem 'sidekiq'
+gem 'sidekiq', '<7'
 gem 'stripe'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
+gem 'faker'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'rspec-rails'
 end
 
