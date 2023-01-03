@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
   def handle_update_cart_items(shopping_cart, sneaker_id)
     if shopping_cart.present? && sneaker_id.present?
       # filter sneaker_id from shopping cart
-      item = shopping_cart.order_items.find_by(sneaker_id: sneaker_id)
+      item = shopping_cart.order_items.find_by(sneaker_id:)
       shopping_cart.update(
         order_items: shopping_cart.order_items.where.not(sneaker_id: item.sneaker_id)
       )

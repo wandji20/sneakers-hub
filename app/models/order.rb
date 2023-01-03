@@ -12,7 +12,7 @@ class Order < ApplicationRecord
   def payment_attributes
     amount = (total * 100).to_i
     {
-      amount: amount,
+      amount:,
       currency: 'eur',
       payment_method_types: ['card'],
       metadata: {

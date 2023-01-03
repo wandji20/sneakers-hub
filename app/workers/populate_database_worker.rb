@@ -6,9 +6,9 @@ class PopulateDatabaseWorker
   end
 
   def fetch_sneakers
-    server = HTTP.headers('x-rapidapi-host': ENV['RAPIDAPI_HOST'],
-                          'x-rapidapi-key': ENV['RAPIDAPI_KEY'])
-      .get(ENV['URL'])
+    server = HTTP.headers('x-rapidapi-host': ENV.fetch('RAPIDAPI_HOST', nil),
+                          'x-rapidapi-key': ENV.fetch('RAPIDAPI_KEY', nil))
+      .get(ENV.fetch('URL', nil))
     response = server.parse
   rescue StandardError => e
     puts e
@@ -36,15 +36,15 @@ class PopulateDatabaseWorker
         brand = create_brand(brand_name)
         gender = create_gender(gender_name)
         create_sneaker(
-          { shoe_id: shoe_id,
-            title: title,
-            colors: colors,
-            name: name,
-            release_date: release_date,
-            price: price,
-            image_url: image_url,
-            brand: brand,
-            gender: gender }
+          { shoe_id:,
+            title:,
+            colors:,
+            name:,
+            release_date:,
+            price:,
+            image_url:,
+            brand:,
+            gender: }
         )
       end
     end

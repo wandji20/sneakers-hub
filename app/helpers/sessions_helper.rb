@@ -51,7 +51,7 @@ module SessionsHelper
     return unless session_cart.present?
 
     # Combine session cart with user cart
-    combined_cart_items = (session_cart.order_items.or(user.shopping_cart.order_items)).select(
+    combined_cart_items = session_cart.order_items.or(user.shopping_cart.order_items).select(
       'DISTINCT ON (order_items.sneaker_id) *'
     )
 
