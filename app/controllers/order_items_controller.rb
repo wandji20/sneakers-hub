@@ -26,9 +26,7 @@ class OrderItemsController < ApplicationController
   def update
     if @order_item.update(quantity: order_item_params[:quantity])
       flash.now[:notice] = "#{@order_item.sneaker.name} has been updated in cart"
-      respond_to do |format|
-        format.turbo_stream
-      end
+      respond_to(&:turbo_stream)
     else
       flash.now[:alert] = 'Something went wrong'
       render turbo_stream: [
@@ -42,9 +40,7 @@ class OrderItemsController < ApplicationController
 
   def destroy
     @order_item.destroy
-    respond_to do |format|
-      format.turbo_stream
-    end
+    respond_to(&:turbo_stream)
   end
 
   private

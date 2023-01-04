@@ -2,8 +2,9 @@ import { Controller } from "stimulus"
 import {loadStripe} from '@stripe/stripe-js';
 
 export default class extends Controller {
+  static targets = ['errorMessage', 'buttonText', 'spinner', 'submitButton']
+  
   connect() {
-    this.checkStatus()
     this.displayPaymentIntent()
   }
   
@@ -17,14 +18,13 @@ export default class extends Controller {
     };
     this.elements = this.stripe.elements({ appearance, clientSecret });
   
-    const paymentElement = this.elements.create("payment");
+    const paymentElement = this.elements.create("payment", {options: { fields: {billingDetails: 'never'}}});
     paymentElement.mount("#payment-element");
   }
 
   async handleSubmit(e) {
     e.preventDefault();
     this.setLoading(true);
-  
     const { error } = await this.stripe.confirmPayment({
       elements: this.elements,
       confirmParams: {
@@ -32,71 +32,47 @@ export default class extends Controller {
       },
     });
 
-    if (error.type === "card_error" || error.type === "validation_error") {
-      this.showMessage(error.message);
-    } else {
-      this.showMessage("An unexpected error occurred.");
-    }
+    this.showMessage(error.message);
+    // if (error.type === "card_error" || error.type === "validation_error") {
+    // } else {
+    //   this.showMessage("An unexpected error occurred.");
+    // }
+    // setTimeout(async () => {
+    // }, 2000)
   
     this.setLoading(false);
-  }
-
-    // Fetches the payment intent status after payment submission
-  async checkStatus() {
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    );
-
-    if (!clientSecret) {
-      return;
-    }
-
-    const { paymentIntent } = await this.stripe.retrievePaymentIntent(clientSecret);
-
-    switch (paymentIntent.status) {
-      case "succeeded":
-        this.showMessage("Payment succeeded!");
-        break;
-      case "processing":
-        this.showMessage("Your payment is processing.");
-        break;
-      case "requires_payment_method":
-        this.showMessage("Your payment was not successful, please try again.");
-        break;
-      default:
-        this.showMessage("Something went wrong.");
-        break;
-    }
   }
 
   // ------- UI helpers -------
 
   showMessage(messageText) {
-    const messageContainer = document.querySelector("#payment-message");
+    const errorMessage = this.errorMessageTarget;
 
-    messageContainer.classList.remove("hidden");
-    messageContainer.textContent = messageText;
+    errorMessage.classList.remove("d-none");
+    errorMessage.textContent = messageText;
 
     setTimeout(function () {
-      messageContainer.classList.add("hidden");
+      errorMessage.classList.add("d-none");
       messageText.textContent = "";
     }, 4000);
   }
 
   // Show a spinner on payment submission
   setLoading(isLoading) {
+    console.log(`setting Loading to ${isLoading}`)
     if (isLoading) {
       // Disable the button and show a spinner
-      document.querySelector("#submit").disabled = true;
-      document.querySelector("#spinner").classList.remove("hidden");
-      document.querySelector("#button-text").classList.add("hidden");
+      this.buttonTextTarget.textContent = 'Processing...'
+      this.buttonTextTarget.classList.add('disabled');
+      this.spinnerTarget.classList.remove("d-none");
+      this.submitButtonTarget.classList.remove('bg-primary')
+      this.submitButtonTarget.classList.add('bg-success')
     } else {
-      document.querySelector("#submit").disabled = false;
-      document.querySelector("#spinner").classList.add("hidden");
-      document.querySelector("#button-text").classList.remove("hidden");
+      this.buttonTextTarget.textContent = 'Pay now'
+      this.buttonTextTarget.classList.remove('disabled');
+      this.spinnerTarget.classList.add("d-none");
+      this.submitButtonTarget.classList.add('bg-primary')
+      this.submitButtonTarget.classList.remove('bg-success')
     }
-    
-    
-
   }
 }

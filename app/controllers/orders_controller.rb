@@ -42,7 +42,8 @@ class OrdersController < ApplicationController
 
   # rubocop:disable Lint/DuplicateBranch
   def set_stripe_event
-    endpoint_secret = ENV['STRIPE_ENDPOINT_SECRET'] || Rails.application.credentials.dig(:stripe, :test_endpoint_secret)
+    endpoint_secret = ENV['STRIPE_ENDPOINT_SECRET'] || Rails.application.credentials.dig(:stripe,
+                                                                                         :stripe_endpoint_secret)
     payload = request.body.read
     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
     event = nil
@@ -67,9 +68,11 @@ class OrdersController < ApplicationController
   # rubocop:enable Lint/DuplicateBranch
 
   def handle_update_cart_items(shopping_cart, sneaker_id)
-    if shopping_cart.present? && sneaker_id.present?
-      # filter sneaker_id from shopping cart
-      item = shopping_cart.order_items.find_by(sneaker_id: sneaker_id)
+    if shopping_cart.present? && sneaker_id.present? &&
+       # filter sneaker_id from shopping cart
+       (item = shopping_cart.order_items.find_by(sneaker_id:))
+      return unless item
+
       shopping_cart.update(
         order_items: shopping_cart.order_items.where.not(sneaker_id: item.sneaker_id)
       )

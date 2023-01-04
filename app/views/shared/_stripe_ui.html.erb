@@ -1,4 +1,4 @@
-<div class="col-12 col-md-6 p-1" 
+<div class="col-12 p-1" 
   data-controller="stripe-payment"
   data-client-secret=<%= order.payment_intent_client_id %>
   data-publishable-key=<%= stripe_key %>
@@ -9,10 +9,26 @@
     <div id="payment-element">
       <!--Stripe.js injects the Payment Element-->
     </div>
-    <button class="btn w-100 bg-success text-white mt-3" id="submit">
-      <div class="spinner hidden" id="spinner"></div>
-      <span id="button-text">Pay now</span>
+    <span 
+      data-stripe-payment-target="errorMessage" 
+      class="d-none text-danger mt-2"
+    ></span>
+    <button
+      data-stripe-payment-target="submitButton"
+      class="btn w-100 bg-primary text-white mt-3 d-flex justify-content-center align-items-center"
+    >
+      <div
+        data-stripe-payment-target="spinner"
+        class="spinner-border me-2 d-none" 
+        role="status" 
+      >
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <span 
+        data-stripe-payment-target="buttonText"
+      >
+        Pay now
+      </span>
     </button>
-    <div id="payment-message" class="hidden"></div>
   </form>
 </div>

@@ -12,13 +12,13 @@
       </li>
     </ol>
   </nav>
-  <article class="d-flex flex-column align-items-center flex-lg-row flex-lg-wrap secondary-bg p-2">
-    <div class="bg-white col-8 col-lg-4 rounded-3">
+  <article class="d-flex flex-column align-items-center justify-content-around flex-lg-row flex-lg-wrap secondary-bg p-2">
+    <div class="bg-white col-12 col-lg-4 rounded-3">
       <%= image_tag @sneaker.image_url, alt: @sneaker.title, class: "img-fluid m-auto rounded-3" %>
     </div>
-    <div class="col ps-2 d-lg-flex flex-lg-column justify-content-lg-between">
+    <div class="col-12 col-lg-4 d-lg-flex flex-lg-column justify-content-lg-between">
       <h6 class="primary-font-size mt-2"><%= @sneaker.title %></h6>
-      <div class="px-2 py-3 py-lg-2 col col-6">
+      <div class="">
         <p class="py-lg-3">
           <span class="inline-block fw-bold">$<%= @sneaker.price %></span>
         </p>
@@ -36,11 +36,11 @@
         </p>
         
       </div>
-      <div class="d-flex w-100 flex-column flex-sm-row py-2">
-        <%= button_to order_items_path(sneaker_id: @sneaker.id), class: "col-12 btn bg-dark text-light my-1 primary-font-size" do %>
+      <div class="d-flex flex-column justify-content-between flex-sm-row py-2 ">
+        <%= button_to order_items_path(sneaker_id: @sneaker.id), class: "w-100 btn bg-dark text-light my-1 primary-font-size" do %>
           <span>Add to Cart</span>
         <% end %>
-        <%= button_to orders_path(sneaker_id: @sneaker.id), class: "col-12 ms-sm-3 btn bg-black text-light my-1 primary-font-size" do %>
+        <%= button_to orders_path(sneaker_id: @sneaker.id), class: "w-100 btn bg-black text-light my-1 primary-font-size" do %>
           <span>
             Checkout Sneaker
           </span>
