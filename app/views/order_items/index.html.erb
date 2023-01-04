@@ -1,48 +1,48 @@
-<section class="container-fluid">
+<section class="container-fluid p-0">
    
   <h3 class="text-center mt-2 fw-bold fs-3">Shopping Cart</h3>
-    <% if @shopping_cart_items&.size > 0 %>
-  
-      <div class="container-fluid order-items " id="order-items">
-        <%= render @shopping_cart_items %>
-      </div>
-      <div class="container-fluid d-none d-sm-block">
-        <%= turbo_frame_tag 'total_price_sm' do %>
-          <%= render partial: 'order_items/total_order_price', locals: { total: @total} %>
-        <% end %>
-        <div class="col d-flex justify-content-between justify-content-sm-start">
-          <%= button_to orders_path, class: "col-12 btn bg-black text-light primary-font-size" do %>
-            <span>Checkout</span>
-            <span><i class="bi bi-chevron-right"></i></span>
-          <% end %>
+  <% if @shopping_cart_items&.size > 0 %>
 
-          <%= link_to sneakers_path, class: 'col-6 text-center ms-sm-4' do %>
-            <button type="button" class="btn  primary-font-size btn-secondary">
-              Continue Shopping
-            </button>
-          <% end %>
-        </div>
-        
-      </div>
-      <div class="mt-2 fixed-bottom bg-light container-fluid order-summary pb-3 d-sm-none">
-        <%= turbo_frame_tag 'total_price_lg' do %>
-          <%= render partial: 'order_items/total_order_price', locals: { total: @total} %>
+    <div class="container-fluid order-items " id="order-items" style="max-width: 800px">
+      <%= render @shopping_cart_items %>
+    </div>
+    <div class="container-fluid d-none d-md-block py-2" style="max-width: 800px">
+      <%= turbo_frame_tag 'total_price_sm' do %>
+        <%= render partial: 'order_items/total_order_price', locals: { total: @total} %>
+      <% end %>
+      <div class="d-flex justify-content-between justify-content-md-start">
+        <%= button_to orders_path, class: "btn bg-black text-light primary-font-size" do %>
+          <span>Checkout</span>
+          <span><i class="bi bi-chevron-right"></i></span>
         <% end %>
-        <div class="col d-flex justify-content-between justify-content-sm-start">
-          <%= button_to orders_path, class: "col-12 btn bg-black text-light primary-font-size" do %>
-            <span>Checkout</span>
-            <span><i class="bi bi-chevron-right"></i></span>
-          <% end %>
 
-          <%= link_to sneakers_path, class: 'col-6 text-center ms-sm-4' do %>
-            <button type="button" class="btn col-12  primary-font-size btn-secondary">
-              Continue Shopping
-            </button>
-          <% end %>
-        </div>
-        
+        <%= link_to sneakers_path, class: 'text-center ms-md-4' do %>
+          <button type="button" class="btn  primary-font-size btn-secondary">
+            Continue Shopping
+          </button>
+        <% end %>
       </div>
-    <% else %>
-      <p>No items in List Yet</p>
-    <% end %>
+      
+    </div>
+    <div class="mt-2 pb-2 fixed-bottom bg-light container-fluid order-summary d-md-none" style="max-width: 800px">
+      <%= turbo_frame_tag 'total_price_lg' do %>
+        <%= render partial: 'order_items/total_order_price', locals: { total: @total} %>
+      <% end %>
+      <div class="d-flex justify-content-between justify-content-md-start">
+        <%= button_to orders_path, class: "col-12 btn bg-black text-light primary-font-size" do %>
+          <span>Checkout</span>
+          <span><i class="bi bi-chevron-right"></i></span>
+        <% end %>
+
+        <%= link_to sneakers_path, class: 'col-6 text-center ms-md-4' do %>
+          <button type="button" class="btn col-12  primary-font-size btn-secondary">
+            Continue Shopping
+          </button>
+        <% end %>
+      </div>
+      
+    </div>
+  <% else %>
+    <p>No items in List Yet</p>
+  <% end %>
 </section>

@@ -6,6 +6,6 @@ module ApplicationHelper
   end
 
   def stripe_key
-    ENV['PUBLISHABLE_KEY'] || Rails.application.credentials.dig(:stripe, :test_publishable_key)
+    ENV['STRIPE_PUBLISHABLE_KEY'] || Rails.application.credentials.dig(:stripe, :stripe_publishable_key)
   end
 end

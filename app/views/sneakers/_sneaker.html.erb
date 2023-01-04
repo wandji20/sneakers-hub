@@ -1,16 +1,18 @@
 <%= link_to sneaker, class: " text-decoration-none text-black col-12 col-sm-6 col-lg-4 col-xl-3", "data-turbo-frame": "_top" do %>
-  <article class="m-1 bg-white">
-    <div class="sneaker-background" style="background: url('<%= image_url sneaker.image_url %>');   background-repeat: no-repeat; background-position: center; background-size: 100% 240px">
-
+  <article class="m-1 p-2 bg-white">
+    <div class="sneaker-background">
+      <img src="<%= sneaker.image_url %>" alt="<%= sneaker.name %>" class="img-fluid" >
     </div>
-    <p class="d-flex justify-content-between p-1">
+    <p class="d-flex justify-content-between">
       <span class="d-inline-block d-lg-none"><%= truncate(sneaker.name, length: 23) %></span>
       <span class="d-none d-lg-inline-block"><%= truncate(sneaker.name, length: 15) %></span>
-      <span class="inline-block">$<%= sneaker.price %></span>
     </p>
-    <p class="fw-light p-1">
-      <span>Release:</span>
-      <span><%= sneaker.release_date&.strftime('%a %d %b %Y') %></span>
+    <p class="d-flex justify-content-between align-items-center">
+      <span class="fw-light">
+        Release:
+        <%= sneaker.release_date&.strftime('%a %d %b %Y') %>
+      </span>
+      <span class="">$<%= sneaker.price %></span>
     </p>
   </article>
 <% end %>

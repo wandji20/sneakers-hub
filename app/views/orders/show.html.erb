@@ -1,8 +1,12 @@
-<section class="container">
-  <p>
-   Use <code>4242 4242 4242 4242</code> for test payment
+<section class="container mt-4" >
+  <p class="text-center">
+    Use <code>4242 4242 4242 4242</code> for test payment
   </p>
-  <div class="d-flex flex-column flex-sm-row mt-4 justify-content-center" id=<%= dom_id(@order)%> >
+  <div 
+    class="d-flex flex-column mx-auto mt-4 justify-content-center" 
+    style="max-width: 400px; font-size: 0.93rem" 
+    id=<%= dom_id(@order)%> 
+  >
     <%= render 'order_details', order: @order %>
   </div>
 </section>
